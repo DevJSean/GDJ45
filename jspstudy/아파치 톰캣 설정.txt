@@ -1,0 +1,33 @@
+아파치 톰캣 다운
+https://tomcat.apache.org/
+download tomcat  9
+9.0.62
+core 버전
+zip파일
+
+bin 폴더의 startup을 이용해 tomcat.bat을 켠다
+중지할 땐 shutdown.bat이다.
+
+
+
+
+이클립스에 연결
+no servers are available. click this link to create a new server... 누르기
+아파치 폴더 - Tomcat v9.0 Server next
+C:\GDJ45\installer\apache-tomcat-9.0.62  next - finish
+
+서버 시작 누르면
+Port 8080 required by Tomcat v9.0 Server at localhost is already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+에러 뜸 -> 오라클이 port 8080 쓰고 있음
+
+servers의 tomcat 서버 포트 번호를 수정
+servers탭의 tomcat 더블클릭
+modify the server ports - http/1.1 8080을 9090로 수정
+탭을 닫고 save
+
+apache tomcat 원본 폴더에서는 port 8080으로 유지되어 있음. 원본은 수정되지 않는다.
+eclipse가 복사해 간 server 폴더의 server.xml은 9090으로 바뀜. 실행에 필요한 폴더는 여기임.
+
+나중에 실제 서버에서 사용할 때는
+startup.sh
+shutdown.sh 을 사용한다.

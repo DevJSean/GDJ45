@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<!-- https://mybatis.org/mybatis-3/ko/getting-started.html에서 받아온 양식 -->
+  
+<configuration>
+
+  <!-- property 외부 파일에 둔 경우 적어야 한다. -->
+  <properties resource="mybatis/config/db.properties"></properties>
+
+  <!-- 
+  	DB Column  -  JAVA
+  	STU_NO     -  stuNo
+  	SNAKE_CASE와 CamelCase 자동변환
+  -->
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true"/> 
+  </settings>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/> <!-- db.properties 파일에 저장된 변수를 el로 읽기 -->
+        <property name="url" value="${url}"/> 
+        <property name="username" value="${username}"/> 
+        <property name="password" value="${password}"/> 
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="mybatis/mapper/student.xml"/><!-- /로 수정 -->
+  </mappers>
+  
+</configuration>

@@ -1,0 +1,13 @@
+학생 평균점수 기준  상위 3명 시상을 위해서 명단을 파악하고자 한다.(dbstudy 참고, ROWNUM/RANK함수)
+	
+	10초에 한 번씩 "시상명단.txt" 파일 생성
+
+	금상 : 철수(90점)
+	은상 : 영희(80점)
+	동상 : 민수(70점)
+
+1. batch 패키지 생성
+   1) StudentListener
+   2) StudentJob - DB에서 명단 가져와서 "시상명단.txt"파일 만들기
+2. Student.xml - 쿼리문 작성
+3. StudentDAO.java

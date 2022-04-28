@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- name 속성 == 파라미터 -->
+	
+	<form action="/SERVLET/FormServlet" method="post">
+		<label for="name">
+			이름
+			<input type="text" name="name"> <!-- name 속성이 있기 때문에 -->
+		</label>                            <!-- 입력 유무와 상관 없이 파라미터는 null이 아니다 -->
+		<label for="age">                   <!-- 입력하지 않으면 빈 문자열이 들어간다 -->
+			나이
+			<input type="text" name="age">
+		</label>
+		<button>전송</button>
+	</form>
+
+</body>
+</html>

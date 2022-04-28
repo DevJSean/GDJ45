@@ -1,0 +1,38 @@
+DBCP와 MYBATIS의 예외처리에 관하여 다른 부분을 JUNIT에서 다룬다.
+
+JUnit (제이유닛)은 자바 프로그래밍 언어용 유닛 테스트 프레임워크
+
+JUNIT은 repository(mapper와 dao)부분까지 만든 후 테스트하기 위함이다.
+
+service의 return은 af : actionforward(어디로 어떻게 가세요)
+
+테스트의 단위는 기본적으로 값이어야 한다.
+테스트의 단위는 DAO의 DB를 다녀오는 메소드로 한다.
+-----------------------------------------------------------------------
+
+public Product selectProductByNo ( Long no) {
+}
+Long no로 구한 Product가 반환된다.
+null 값이냐 아니냐를 검사한다.
+
+public List<productDTO> selectProductList() {
+}
+목록의 개수를 검사한다.
+
+-----------------------------------------------------------------------
+※ 사전 작업
+
+1. JUNIT을 쓴다고 프로젝트에 Build Path 설정한다. add library
+2. test 패키지를 별도로 만든다.
+3. JUnit Test Case - New JUnit Jupiter case - 이름은 class 규칙으로 작성
+
+-----------------------------------------------------------------------
+※ 주의사항
+
+단위 테스트는
+tomcat의 context.xml을 사용할 수 없고
+
+jdbc connection을 사용해야 한다.
+Class.forName("oracle.jdbc.OracleDriver");
+con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "1111");
+(성능을 낮추는 것임)

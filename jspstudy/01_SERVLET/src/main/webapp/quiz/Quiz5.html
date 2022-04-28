@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>영화 검색</title>
+
+<script src="../js/jquery-3.6.0.js"></script>
+
+<script>
+	$(document).ready(function(){
+		//$('#btn').click(function(){})
+		$('#btn').on('click', function(){
+			if($('#query').val() == '') { // 검색한 검색어가 없을 때
+				alert('검색어를 입력하세요');
+				return;
+			}
+			$.ajax({
+				type: 'get',
+				url: '/SERVLET/Quiz5',
+				data: 'query=' + $('#query').val(),
+				dataType: 'json', 
+				success: function(resData){
+					$('#movie_list').empty(); // 새로운 검색 결과만 보이도록 이전 결과 지우기
+					$.each(resData.items, function(i, movie){
+						var tr = $('<tr>') // tr 태그 새로 만들기
+						tr.append($('<td>').html(movie.title));
+						tr.append($('<td>').html(movie.subtitle));
+						tr.append($('<td>').html($('<a>').attr('href', movie.link).html($('<img>').attr('src', movie.image))));
+						tr.append($('<td>').html(movie.pubDate));
+						tr.append($('<td>').html(movie.director));
+						tr.append($('<td>').html(movie.actor));
+						tr.append($('<td>').html(movie.userRating));
+						$('#movie_list').append(tr);
+					});
+				},
+				error: function(jqXHR){
+					alert(jqXHR.responseText);
+				}
+			});
+		});
+	});
+</script>
+
+</head>
+<body>
+
+	<input type="text" id="query" placeholder="검색어 입력">
+	<input type="button" value="검색" id="btn">
+	<hr>
+	
+	<table border="1">
+		<thead>
+			<tr>
+			  <td>제목</td>
+			  <td>영문제목</td><!-- 클릭하면 link 열림 -->
+			  <td>이미지</td>
+			  <td>제작년도</td>
+			  <td>감독</td>
+			  <td>출연배우</td>
+			  <td>평점</td>
+			</tr>
+		</thead>
+		<tbody id="movie_list">
+		
+		</tbody>		
+
+	</table>
+
+</body>
+</html>

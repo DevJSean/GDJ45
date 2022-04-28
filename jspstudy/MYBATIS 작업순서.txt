@@ -1,0 +1,48 @@
+0. jar 파일
+ (	c3p0-0.9.5.2.jar, 
+  	log4j-1.2.16.jar,
+  	quartz-2.3.0-SNAPSHOT.jar,
+ 	quartz-jobs-2.3.0-SNAPSHOT.jar,
+  	slf4j-api-1.7.7.jar,
+  	slf4j-log4j12-1.7.7.jar,
+  	lombok-1.18.22.jar,
+  	mybatis-3.5.9.jar,
+  	taglibs-standard-impl-1.2.5.jar,
+  	taglibs-standard-spec-1.2.5.jar
+)
+
+1. DB 테이블 생성
+
+2. domain 패키지
+	DTO 생성 (getter, setter)
+
+3. common 패키지
+	ActionForward생성
+
+4. mybatis.config 패키지
+	db.properties.txt
+	mybatis-config.xml
+
+5. mybatis.mapper 패키지 (쿼리 적는 곳)
+	?.xml
+
+6. repository 패키지
+	?DAO.java 
+
+7. service 패키지
+	?Service.java 인터페이스 생성
+	각 서비스.java마다 인터페이스 구현
+
+8. controller 패키지
+	?Controller.java 서블릿 생성
+
+9. webapp 폴더에 jsp파일 담을 폴더 생성
+	list.jsp
+	등등
+	
+10. webapp 폴더에 index.jsp 웰컴 파일
+
+※ Mapper -> DAO -> service -> Controller  -> jsp 순으로 작업
+
+※ webapp 밑에 assets폴더에는 css파일, 이미지 파일, video 파일 등
+※ jsp파일들에 css외부파일 <link rel="stylesheet" href="./assets/css/?.css">

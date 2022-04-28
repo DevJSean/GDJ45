@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="mybatis.product">
+	
+	<!-- 1. 전체 제품 조회 -->
+	<select id="selectProductList" resultType="mybatis.ProductDTO">
+		SELECT PRODUCT_NO, NAME, PRICE, IMAGE
+		  FROM PRODUCT
+		 ORDER BY PRODUCT_NO DESC
+	</select>
+	
+	
+	<!-- 2. 제품 등록하기 -->
+	<insert id="insertProduct" parameterType="mybatis.ProductDTO">
+		INSERT INTO
+			PRODUCT(PRODUCT_NO, NAME, PRICE, IMAGE)
+		VALUES
+			(PRODUCT_SEQ.NEXTVAL, #{name}, #{price}, #{image})
+	</insert>
+
+ 	
+ 	<!-- 3. 개별 제품 상세조회 -->
+ 	 <select id="selectProductByNo" parameterType="Long" resultType="mybatis.ProductDTO">
+		SELECT PRODUCT_NO, NAME, PRICE, IMAGE
+		  FROM PRODUCT
+		 WHERE PRODUCT_NO = #{productNo}
+ 	 </select>
+ 	 
+ 	<!-- 4. 제품 삭제하기 -->
+ 	<delete id="deleteProduct" parameterType="Long">
+ 		DELETE
+ 		  FROM PRODUCT
+ 		 WHERE PRODUCT_NO = #{productNo}
+ 	</delete>
+ 	 
+</mapper>

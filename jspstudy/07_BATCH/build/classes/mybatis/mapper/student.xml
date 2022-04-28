@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- https://mybatis.org/mybatis-3/ko/getting-started.html에서 받아온 양식 -->
+<!-- 1. mapper : SQL을 작성해 두는곳 -->
+<!-- 2. mapper namespace에는 mapper의 전체 경로(패키지 포함)를 작성해 둔다. -->
+<!-- mybatis.mapper 패키지에 저장된 student.xml -->
+<mapper namespace="mybatis.mapper.student">
+
+	<!-- 쿼리문 작업하는 곳 , 모든 쿼리문에 세미콜론(;) 넣지 말 것! -->
+	<!-- id 값을 DAO에서 메소드 이름으로 쓴다. -->
+	
+	<!-- 1. 전체학생목록 -->
+	<select id="selectStudentList" resultType="domain.Student">
+		SELECT STU_NO, NAME, KOR, ENG, MAT, AVG, GRADE
+		  FROM STUDENT
+         ORDER BY STU_NO DESC
+	</select>
+	
+	<!-- 2. 전체학생수 -->
+	<select id="getTotalCount" resultType="Integer"> <!-- int로 해도 됨 -->
+		SELECT COUNT(*)
+		  FROM STUDENT
+	</select>
+	
+	<!-- 3. 전체학생평균 -->
+	<select id="getTotalAverage" resultType="Double"> <!-- double로 해도 됨 -->
+		SELECT NVL(AVG(AVG), 0)
+		  FROM STUDENT
+	</select> <!--  학생이 한 명도 없으면 null 뜸 -> NVL로 해결 -->
+	 
+	<!-- 4. 학생추가 -->
+	<insert id="insertStudent" parameterType="domain.Student">
+		INSERT INTO
+		   STUDENT(STU_NO, NAME, KOR, ENG, MAT, AVG, GRADE)
+		VALUES (STUDENT_SEQ.NEXTVAL, #{name}, #{kor}, #{eng}, #{mat}, #{avg}, #{grade})
+	</insert>
+	 
+	 <!-- 5. 학생상세조회 -->
+	 <select id="selectStudentByStuNo" parameterType="Long" resultType="domain.Student">
+	 	SELECT STU_NO, NAME, KOR, ENG, MAT, AVG, GRADE
+	 	  FROM STUDENT
+	 	 WHERE STU_NO = #{stuNo}
+	 </select> <!-- SNAKE_CASE = CamelCase mybatis-config에서 세팅을 해서 가능하다 -->
+	 
+	 <!-- 6. 학생수정 -->
+	 <update id="updateStudent" parameterType="Map">
+	 	UPDATE STUDENT
+	 	   SET NAME = #{name}
+	 	     , KOR = #{kor}
+	 	     , ENG = #{eng}
+	 	     , MAT = #{mat}
+	 	     , AVG = #{avg}
+	 	     , GRADE = #{grade}
+	 	 WHERE stu_no = #{stuNo}
+	 </update>
+	 
+	 <!-- 7. 학생삭제 -->
+	 <delete id="deleteStudent" parameterType="Long">
+	 	DELETE 
+	 	  FROM STUDENT
+	 	 WHERE STU_NO = #{stuNo}
+	 </delete>
+	 
+	 <!-- 8. 학생조회(점수) -->
+	 <select id="selectStudentByAvg" parameterType="Map" resultType="domain.Student"> <!-- begin과 end를 하나로 만들려면 Map 밖에 방법이 없다. -->
+		SELECT STU_NO, NAME, KOR, ENG, MAT, AVG, GRADE
+	 	  FROM STUDENT
+	 	 WHERE <![CDATA[AVG >= #{begin} AND AVG <= #{end}]]>
+	 </select>
+	 <!-- <![CDATA[  ]]> 대괄호 안에 있는 것을 문자 그대로 해석하라는 뜻 -->
+ 	 <!-- 태그 안에 주석 넣으면 가끔 인식하는 경우가 있으니 태그 밖에 적어야 한다.
+ 	 	  CDATA 사용하는 것보다 아래 방법이 더 바람직하다.
+	 	SELECT STU_NO, NAME, KOR, ENG, MAT, AVG, GRADE
+	 	  FROM STUDENT
+	 	 WHERE AVG BETWEEN #{begin} AND #{end}     -->
+	 	 
+	 
+	 <!-- 9. 조회된 학생수(점수)  -->
+	 <select id="getSearchCount" parameterType="Map" resultType="Integer">
+	 	SELECT COUNT(*)
+	 	  FROM STUDENT
+	 	 WHERE <![CDATA[AVG >= #{begin} AND AVG <= #{end}]]>
+	 </select>
+	 
+	 <!-- 10. 조회된 학생평균(점수) -->
+	 <select id="getSearchAverage" parameterType="Map" resultType="Double">
+	 	SELECT NVL(AVG(AVG), 0)
+	 	  FROM STUDENT
+	 	 WHERE <![CDATA[AVG >= #{begin} AND AVG <= #{end}]]>
+	 </select>
+	 	 
+	 	 
+	 <!-- ex03.batch에서 사용할 평균 기준으로 상위 3명 조회하기 -->
+	 <!-- ROWNUM 칼럼 & ROW_NUMBER 함수 ,  RANK함수이용-->
+	 <select id="selectStudentTop3" resultType="domain.Student">
+	 	SELECT A.RANK, A.NAME, A.AVG
+	 	  FROM (SELECT ROW_NUMBER() OVER(ORDER BY AVG DESC) AS RANK, NAME, AVG
+	 	          FROM STUDENT) A
+	 	 WHERE A.RANK BETWEEN 1 AND 3
+	 </select>
+ 	 
+</mapper>

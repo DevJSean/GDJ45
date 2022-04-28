@@ -1,0 +1,17 @@
+window-perspective - java ee로 변경
+workspace를 jspstudy로 변경
+
+window-preferences -general-apprearance- theme dark
+				-colors and fonts - basic  - text font - d2coding
+		-general - workspace-text file encoding - other:utf-8
+
+		- web - css files - encoding: utf8
+		         - htmlfiles - encoding: utf8
+		         - jsp files - encoding: utf8
+
+java - editor - syntax coloring - java - classes ( 핑크)
+                                                    interfaces (회색)
+                                                    methods(오렌지)
+                                                    
+window - web browser - 5 chrome
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> <!-- html 주석-->
+    <style type="text/css"> /* CSS 주석 */ /* type 설명 : css라고 명시하는 것임 */
+        /* 
+            internal style
+
+            1. <style> 태그에 CSS를 작성하는 방식이다.
+            2. CSS 작성 방식
+                선택자 {
+                    CSS속성: 값;
+                    CSS속성: 값;
+                }
+        */
+                h1 {
+                    color: deeppink; /* !important 지정하면 최우선 적용(하지만 사용하지 말 것)*/
+                 /* color: deeppink!important; !important로 inline을 무시할 수 있다.(하지만 사용하지 않는다)*/
+                }
+
+    </style>
+</head>
+<body>
+
+    <h1>Hello CSS</h1>
+
+    <!-- inline style 우선순위가 더 높아서 초록색으로 나온다-->
+    <h1 style="color:green">Nice to Meet you</h1>
+
+</body>
+</html>

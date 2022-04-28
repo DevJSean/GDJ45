@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- selector.css 확인 -->
+    <link rel="stylesheet" href="07_selector.css">
+    
+</head>
+<body>
+    1. 클래스 선택자
+    <h1 class="a">Hello CSS</h1>
+
+    <!-- 클래스가 두 개, 두번째 b클래스로 덮어쓰기 -->
+    <h1 class="a b">Nice To Meet You</h1>
+
+    <br><br><hr>
+    2. 아이디 선택자
+    <h1 id="a">How are you today?</h1>
+
+    <br><br><hr>
+    3. 자식 선택자
+    <!-- 네비게이션 바(GNB), 메뉴 만들기 -->
+    <ul>
+        <li>
+            <a href="#">메일</a>
+        </li>
+        <li>
+            <a href="#">카페</a>
+        </li>
+        <li>
+            <a href="#">블로그</a>
+        </li>
+    </ul>
+
+    <!-- <tbody> 태그를 생략해봄 (보이지 않아도 tbody태그는 들어있음) -->
+    <table border="1">
+        <tr>
+            <td>1열</td>
+            <td>2열</td>
+            <td>3열</td>
+        </tr>
+    </table>
+
+    <br><br><hr>
+    4. 후손 선택자
+    <dl>
+        <dt><strong>항목</strong></dt>
+        <dd>라면</dd>
+
+        <dt><strong>조리법</strong></dt>
+        <dd>물을 붓는다</dd>
+        <dd>4분간 끓인다</dd>
+        <dd>맛있게 먹는다</dd>
+    </dl>
+
+    <br><br><hr>
+    5. 모든 형제 선택자
+    <div class="c">
+        <h1>아시아</h1>
+        <h3>대한민국</h3>
+        <h3>일본</h3>
+        <h3>중국</h3>
+    </div>
+
+    <br><br><hr>
+    6. 인접 형제 선택자
+    <dl class="d">
+        <dt>제목</dt>
+        <dd>어린왕자</dd>
+
+        <dt>저자</dt>
+        <dd>생텍쥐베리</dd>
+    </dl>
+
+    <br><br><hr>
+    7. 구조 선택자
+    <ol>
+        <li>JAVA</li>
+        <li>C</li>
+        <li>PYTHON</li>
+        <li>PHP</li>
+    </ol>
+
+    <br><br><hr>
+    8. 속성 선택자
+    <form>
+        <input type="text" placeholder="아이디"><br>
+        <input type="password">
+    </form>
+
+    <br><br><hr>
+    9. 반응 선택자
+    <br>
+    <a href="#">클릭</a>
+
+    <br><br><hr>
+    10. 상태 선택자
+    <form>
+        <input type="text"><br>
+        <input type="radio" name="gender" value="m" id="male">
+        <label for="male">남자</label>
+        <input type="radio" name="gender" value="f" id="female">
+        <label for="female">여자</label>
+    </form>
+
+
+</body>
+</html>

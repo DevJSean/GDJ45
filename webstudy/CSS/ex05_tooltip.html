@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .tooltip {
+            color: blue;
+            cursor: help; /* 마우스 포인터 모양 변경 */
+            position: relative;
+        }
+        /* .tooltip의 이전 부분 
+        .tooltip::before {
+            content: 'before추가된텍스트';
+        }
+        */
+        /* .tooltip에 마우스를 가져다 대면 다음 부분에 추가 */
+        /* .tooltip을 부모, 이 요소를 자식으로 할 수 있다. */
+        .tooltip:hover::after {
+            content: attr(data-describe); /* data-describe 속성 값 */
+            width: 200px;
+            padding: 10px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            background-color: beige;
+            font-size: 12px;
+            color: black;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div>
+        <span class="tooltip" data-describe="풍선 설명입니다">풍선</span> 도움말이 나타나는 문장입니다. <span class="tooltip" data-describe="여기 설명입니다">여기</span>를 선택해 보세요
+    </div>
+
+
+</body>
+</html>

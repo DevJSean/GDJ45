@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 > img {
+            width: 200px;
+        }
+        .box1 > img:nth-of-type(2) {
+            /* 숨김, 차지하던 영역도 없앤다 */
+            display: none;
+        }
+
+        .box2 input[type=checkbox]{
+            display: none;
+        }
+
+        .box3 {
+            /* 블록레벨 -> 인라인레벨로 변경하기 */
+            display: inline;
+            /* 인라인 레벨에서 적용 안되는 항목 */
+            /* 너비 */ width: 100px;
+            /* 높이 */ height: 100px;
+            /* 정렬 */ text-align: center;
+
+            /* 적용 가능 */
+            background-color: red;
+        }
+
+        .box4 {
+            /* 인라인레벨 -> 블록레벨로 변경하기 */
+            display: block;
+            background-color: beige;
+            box-sizing: border-box; /* padding, border 등이 box 사이즈에 영향을 안미치도록 설정*/
+            width: 200px;
+            height: 100px;
+            border: 1px solid black;
+            text-align: center; /* 텍스트 가로 가운데 정렬 */
+            /* vertical-align: middle; 텍스트 세로 정렬 안됨, vertical-align은 테이블에서만*/
+            line-height: 100px; /* 텍스트 세로 가운데 정렬(height와 line-height를 같은 값으로 맞춤, 텍스트가 1줄일 때만 가능) */
+            /* 박스 세로크기 = 텍스트가 입력되는 영역, 행높이 */
+        }
+
+        .box5 {
+            /* 인라인레벨 -> 인라인블록레벨로 변경하기 */
+            display: inline-block;
+            background-color: burlywood;
+            /* 
+                인라인블록
+                1. 블록 요소: 너비, 높이, 정렬 모두 가능
+                2. 인라인 요소: 다른 인라인 요소와 동일한 line에 배치 가능
+            */
+            width:200px;
+            text-align:center; /* 가로 가운데 정렬 */
+            padding: 10px 0;   /* 세로 가운데 정렬(상하 동일한 padding값, height 없는 content-box일 때 사용) */ 
+        }
+
+
+        /* 텍스트 세로 가운데 정렬 방법 (블록레벨)  */
+        /* line-height(border-box), padding(content-box) */
+
+        .box6-1 > a {
+            /* <a> 태그를 inline-block으로 변경하기 */
+            display: inline-block;
+            /* <a> 태그에 너비/높이 지정하기(텍스트 이외 여백도 클릭할 수 있게 됨) */
+            width: 80px;
+            height: 50px;
+            /* <a> 태그의 텍스트 처리하기(정렬, 색상, 밑줄) */
+            text-align: center; /* 가로 가운데 */
+            line-height: 50px;  /* 세로 가운데 */
+            color: rgb(0, 0, 0);
+            text-decoration: none; /* 밑줄 없애기 */
+            /* <a> 태그 영역 확인하기(실제로는 필요 없음) */
+                border: 1px solid black;
+        }
+
+        .box6-2 > a{
+            display: inline-block;
+            /* padding으로 박스 크기, 텍스트 정렬 처리하기 */
+            padding: 10px 20px;
+            /* <a> 태그 영역 확인하기(실제로는 필요 없음) */
+                border: 1px solid black;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <div class="box1">
+        <img alt="고슴도치" src="../images/hedgehog.jpg">
+        <img alt="개구리" src="../images/frog.jpg">
+        <img alt="독수리" src="../images/eagle.jpg">
+    </div>
+
+    <div class="box2">
+        <form>
+            <fieldset>
+                <legend>취미</legend>
+                <input type="checkbox" name="hobbies" value="travel">여행
+                <input type="checkbox" name="hobbies" value="game">게임
+                <input type="checkbox" name="hobbies" value="gym">운동
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="box3">
+        block -> inline box
+    </div>
+
+    <span class="box4">
+        inline -> block box
+    </span>
+
+    <span> other inline </span>
+    <span class="box5">
+        <!-- 한 줄에 다른 inline 요소를 넣을 수 있으면서 너비와 높이를 가진다 -->
+        inline-block box
+    </span>
+    <span> other inline </span>
+
+    <div class="box6-1">
+        <a href="javascript:exit(0)">책</a>
+        <a href="javascript:exit(0)">사전</a>
+        <a href="javascript:exit(0)">부동산</a>
+    </div>
+    <div class="box6-2">
+        <a href="javascript:exit(0)">책</a>
+        <a href="javascript:exit(0)">사전</a>
+        <a href="javascript:exit(0)">부동산</a>
+    </div>
+
+</body>
+</html>

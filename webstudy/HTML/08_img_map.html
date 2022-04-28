@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        이미지 맵
+        
+        1. 이미지 일부에 링크를 생성
+        2. <img> + <map>
+        3. 방식
+           <img usemap="#map이름" src="이미지경로">
+           <map name="map이름">
+               <area shape="사각형(rect) 또는 원(circle)"
+                    coords="좌표"
+                    href="이동할 경로">
+           </map>
+        4. coords 속성
+           0) 그림판 이용해서 좌표 픽셀 값 알아내기
+           1) <area shape="rect"   coords="시작x, 시작y, 종료x, 종료y" href="이동경로">
+           2) <area shape="circle" coords="중심x, 중심y, 반지름" href="이동경로">
+    -->
+    <img usemap="#domino_map" src="../images/dominopizza.jpg">
+    <map name="domino_map">
+        <area shape="rect" 
+              coords="350, 2468, 850, 2600" 
+              href="https://dominos.co.kr">
+        <area shape="circle"
+              coords="930, 324, 100"
+              href="https://dominos.co.kr">
+    </map>
+    
+</body>
+</html>

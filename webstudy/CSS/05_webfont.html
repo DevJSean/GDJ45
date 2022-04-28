@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--
+        1. <link> 태그를 이용한 웹 폰트 사용
+            1) <link> 태그를 복사 붙여넣기 한다.
+            2) font-family 속성을 복사/붙여넣기 한다.
+    -->
+    <!-- 구글 폰트 Noto Sans KR에서 <link>복붙-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <style>
+        h1 {
+            /* 구글 폰트 Noto Sans KR, CSS rules to specify families 복붙 */
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+
+    <!--
+        2. @import 이용한 웹 폰트 사용 (추천)
+            1) @import는 CSS문법이다. CSS영역(CSS 파일 or <style> 태그)에다가 작성해야 한다.
+            2) font-family 속성을 복사/붙여넣기 한다.
+    -->
+    <!-- 구글 폰트 Nanum Gothic에서 @import복붙 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+        h2 {
+            /* 구글 폰트 Nanum Gothic, CSS rules to specify families 복붙 */
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+        /* 
+        모든 요소
+        * { 
+            font-family: 'Noto Sans KR', sans-serif;
+        } 
+        */
+
+    </style>
+
+    <!--
+        3. css 파일에 import
+     -->
+    <link rel="stylesheet" href="05_webfont.css">
+</head>
+<body>
+    <h1>Noto Sans KR</h1>
+    <h2>Nanum Gothic</h2>
+    <h3>Nanum Myeongjo</h3>
+</body>
+</html>

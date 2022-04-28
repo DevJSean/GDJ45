@@ -1,0 +1,13 @@
+1. vs code 설치 (path 자동 추가됨)
+
+2. extensions에서 live server
+
+3.File메뉴 preferences - color theme
+
+4. file - preferences - settings - font family - D2Coding, 폰트 사이즈 20
+
+5. workspace만들기 - webstudy
+
+6. file - open folder - webstudy 열기 - 옵션 선택, 믿는다!
+
+7. show welcome page on startup 해제

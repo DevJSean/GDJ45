@@ -1,0 +1,124 @@
+/* 
+    1. 클래스 선택자 
+    .클래스 {  
+    }
+
+*/
+.a {
+    color: green;
+}
+.b {
+    font-size:12px;
+    color:blue;
+}
+
+
+/* 
+    2. 아이디 선택자
+    #아이디 {
+    }
+*/
+#a {
+    font-style:italic;
+}
+
+
+/*
+    3. 자식 선택자
+        부모 > 자식 {
+        }
+*/
+ul > li > a {
+    color:black;
+    text-decoration: none;
+}
+table > tbody > tr > td { /* <table> 태그에서 <tbody> 태그 항상 사용됨 */
+    color: red;
+}
+
+
+/*
+    4. 후손 선택자
+        조상 후손 {
+        }
+*/
+dl strong {
+    color:thistle;
+}
+
+/*
+    5. 모든 형제 선택자
+        형제 ~ 형제 {
+        }
+*/
+.c > h1 ~ h3{      /* <h1>이 아닌 <h3>들을 선택*/
+    color:teal;
+}
+
+
+/*
+    6. 인접 형제 선택자
+    형제 + 형제 {
+    }
+*/                   /* 여기선 결국 .d > dd와 같다 */
+.d > dt + dd {       /* <dt>와 인접한 <dd>들을 선택 */
+    color:violet;
+}
+
+/*
+    7. 구조 선택자
+        1) first-of-type  : 첫 번째 요소
+        2) last-of-type   : 마지막 요소 
+        3) nth-of-type(n) : n번째 요소
+*/
+ol > li:first-of-type {  /* <li> 중 첫 번째 요소 */
+    font-weight: 900;
+}
+ol > li:last-of-type {
+    font-weight:900;
+}
+ol > li:nth-of-type(2n) {  /* 2n : 0, 2, 4, 6, 8, 10, ... */
+    color:green;
+}
+ol > li:nth-of-type(2n+1) {  /* 2n + 1 : 1, 3, 5, 7, 9, 12, ... */
+    color:blue;
+}
+
+/*
+    8. 속성 선택자
+        1) 요소[속성]     : 속성을 가진 요소, img[src], a[href] 등
+        2) 요소[속성=값]  : 지정한 속성과 지정한 값이 일치하는 요소, input[type=text]
+        3) 요소[속성^=값] : 특정 값으로 시작하는 요소, a[href^=https], a[href^=mailto]
+        4) 요소[속성$=값] : 특정 값으로 끝나는 요소, img[src$=png] 등
+        5) 요소[속성*=값] : 특정 값을 포함하는 요소
+*/
+form > input[placeholder] {
+    background-color: lime;
+}
+form > input[type=password] {
+    background-color: brown;
+}
+
+/*
+    9. 반응 선택자(마우스 반응)
+        1) active : 마우스를 누르고 있는 상태
+        2) hover  : 마우스를 가져다 댄 상태
+*/
+a:hover {
+    color:red;
+}
+a:active {
+    color:orange;
+}
+
+/*
+    10. 상태 선택자
+        1) focus   : 포커스를 가진 요소, 클릭해서 커서를 넣는 것
+        2) checked : 선택한 요소(radio, checkbox)
+*/
+form > input[type=text]:focus {
+    background-color:beige;
+}
+form > input[type=radio]:checked + label{
+    font-weight:900;
+}

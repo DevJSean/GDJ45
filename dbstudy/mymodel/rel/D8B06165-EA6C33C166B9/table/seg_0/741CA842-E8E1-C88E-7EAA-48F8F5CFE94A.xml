@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="741CA842-E8E1-C88E-7EAA-48F8F5CFE94A" name="login_tbl">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>547FBB8D-BE20-B6E2-3D01-E5514BB0EF94</importedID>
+<ordsAlias>table_3</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="login_no" id="D09B3AAD-229A-5F1C-979B-B8C50261D439">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>3E973C7F-12B1-130A-8317-573E24828607</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="member_no" id="A8AAE476-5017-A6D7-FD4B-BA8A84DFF9E0">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>2C1D238A-B6F7-D41D-00B6-2D147A4E863A</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="264A5320-AF06-21BE-C86C-AF2522230BB7" referredColumn="1B80097C-9742-42CB-B122-7AEC96B81E23"/>
+</associations>
+</Column>
+<Column name="login_time" id="F24A90BA-6290-6FD3-D0A1-C45EEDDEE9A9">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>53E816FA-AF87-40C2-E880-80EC6D2FD7AE</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8C3C825D-536F-D033-B841-FAE57C8A7D40" name="login_tbl_PK">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>24F2CE28-7058-50F4-62F7-D78BE7094628</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D09B3AAD-229A-5F1C-979B-B8C50261D439"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="235AB2C3-5FB0-825A-8ED7-7DCD6F7700E0" name="login_tbl_member_tbl_FK">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A8AAE476-5017-A6D7-FD4B-BA8A84DFF9E0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

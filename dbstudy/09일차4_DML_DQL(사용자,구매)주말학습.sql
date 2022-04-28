@@ -1,0 +1,223 @@
+-- 다음 쿼리문을 이용해서 사용자 테이블과 구매 테이블을 작성하시오.
+
+-- 테이블 삭제
+DROP TABLE BUYS;
+DROP TABLE USERS;
+
+-- 사용자 테이블
+CREATE TABLE USERS (
+    USER_NO      NUMBER NOT NULL,                    -- 사용자번호(기본키)
+    USER_ID      VARCHAR2(20 BYTE) NOT NULL UNIQUE,  -- 사용자아이디
+    USER_NAME    VARCHAR2(20 BYTE),                  -- 사용자명
+    USER_YEAR    NUMBER(4),                          -- 태어난년도
+    USER_ADDR    VARCHAR2(100 BYTE),                 -- 주소
+    USER_MOBILE1 VARCHAR2(3 BYTE),                   -- 연락처1(010, 011 등)
+    USER_MOBILE2 VARCHAR2(8 BYTE),                   -- 연락처2(12345678, 11111111 등)
+    USER_REGDATE DATE                                -- 등록일
+);
+-- 사용자 테이블 기본키
+ALTER TABLE USERS
+    ADD CONSTRAINT USERS_PK PRIMARY KEY(USER_NO);
+
+
+-- 구매 테이블
+CREATE TABLE BUYS (
+    BUY_NO        NUMBER NOT NULL,    -- 구매번호
+    USER_ID       VARCHAR2(20 BYTE) , -- 구매자
+    PROD_NAME     VARCHAR2(20 BYTE),  -- 제품명
+    PROD_CATEGORY VARCHAR2(20 BYTE),  -- 제품카테고리
+    PROD_PRICE    NUMBER,             -- 제품가격
+    BUY_AMOUNT    NUMBER              -- 구매수량
+);
+-- 구매 테이블 기본키
+ALTER TABLE BUYS
+    ADD CONSTRAINT BUYS_PK PRIMARY KEY(BUY_NO);
+-- 구매-사용자 외래키
+ALTER TABLE BUYS
+    ADD CONSTRAINT BUYS_USERS_FK FOREIGN KEY(USER_ID)
+        REFERENCES USERS(USER_ID);
+
+
+-- 사용자 시퀀스
+DROP SEQUENCE USERS_SEQ;
+CREATE SEQUENCE USERS_SEQ NOCACHE;
+
+
+-- 구매 시퀀스
+DROP SEQUENCE BUYS_SEQ;
+CREATE SEQUENCE BUYS_SEQ START WITH 1001 NOCACHE;
+
+
+-- USERS 테이블의 레코드(행, ROW)
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'YJS', '유재석', 1972, '서울', '010', '11111111', '08/08/08');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'KHD', '강호동', 1970, '경북', '011', '22222222', '07/07/07');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'KKJ', '김국진', 1965, '서울', '010', '33333333', '09/09/09');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'KYM', '김용만', 1967, '서울', '010', '44444444', '15/05/05');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'KJD', '김제동', 1974, '경남', NULL, NULL, '13/03/03');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'NHS', '남희석', 1971, '충남', '010', '55555555', '14/04/04');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'SDY', '신동엽', 1971, '경기', NULL, NULL, '08/10/10');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'LHJ', '이휘재', 1972, '경기', '011', '66666666', '06/04/04');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'LKK', '이경규', 1960, '경남', '011', '77777777', '04/12/12');
+INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'PSH', '박수홍', 1970, '서울', '010', '88888888', '12/05/05');
+
+-- BUYS 테이블의 레코드(행, ROW)
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'KHD', '운동화', '신발', 30, 2);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'KHD', '노트북', '전자', 1000, 1);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'KYM', '모니터', '전자', 200, 1);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'PSH', '모니터', '전자', 200, 5);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'KHD', '청바지', '의류', 50, 3);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'PSH', '메모리', '전자', 80, 10);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'KJD', '책', '의류', 15, 5);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'LHJ', '책', '서적', 15, 2);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'LHJ', '청바지', '의류', 50, 1);
+INSERT INTO BUYS VALUES (BUYS_SEQ.NEXTVAL, 'PSH', '운동화', '전자', 30, 2);
+
+COMMIT;
+
+
+-- 1. 구매 테이블에서 제품명이 '운동화'인 구매 내역의 제품카테고리를 '신발'로 수정하시오.
+UPDATE BUYS
+   SET PROD_CATEGORY = '신발'
+ WHERE PROD_NAME = '운동화';
+
+-- 2. 제품명이 '책'인데 제품카테고리가 '서적'이 아닌 구매 목록을 찾아서 제품카테고리를 '서적'으로 수정하시오.
+UPDATE BUYS
+   SET PROD_CATEGORY = '서적'
+ WHERE PROD_NAME = '책'
+   AND PROD_CATEGORY != '서적';
+
+-- 3. 연락처1이 '011'인 사용자의 연락처1을 '010'으로 수정하시오.
+UPDATE USERS
+   SET USER_MOBILE1 = '010'
+ WHERE USER_MOBILE1 = '011';
+
+-- 4. 사용자 테이블에서 사용자번호가 5인 사용자를 삭제하시오.
+--    사용자번호가 5인 사용자의 구매 내역을 먼저 삭제한 뒤 진행하시오.
+DELETE
+  FROM BUYS B
+ WHERE B.USER_ID = (SELECT U.USER_ID
+                      FROM USERS U
+                     WHERE U.USER_NO = 5);
+DELETE
+  FROM USERS
+ WHERE USER_NO = 5;
+
+-- 5. 연락처1이 없는 사용자의 사용자번호, 아이디, 연락처1, 연락처2를 조회하시오.
+SELECT USER_NO, USER_ID, USER_MOBILE1, USER_MOBILE2
+  FROM USERS
+ WHERE USER_MOBILE1 IS NULL;
+
+-- 6. 연락처2가 '5'로 시작하는 사용자의 사용자번호, 아이디, 연락처1, 연락처2를 조회하시오.
+SELECT USER_NO, USER_ID, USER_MOBILE1, USER_MOBILE2
+  FROM USERS
+ WHERE USER_MOBILE2 LIKE '5%';
+
+-- 7. 제품을 구매한 사용자의 아이디별 구매횟수를 조회하시오. (GROUP BY)
+-- 아이디  구매횟수
+-- KHD     3
+-- ...
+SELECT USER_ID AS 아이디, COUNT(*) AS 구매횟수
+  FROM BUYS
+ GROUP BY USER_ID;
+
+-- 8. 어떤 고객이 어떤 제품을 구매했는지 조회하시오.
+--    구매 이력이 없는 고객은 '구매이력없음'으로 조회하시오.
+-- 고객명   구매제품
+-- 강호동   운동화
+-- 이경규   구매이력없음
+-- ...
+SELECT U.USER_NAME AS 고객명, NVL(B.PROD_NAME, '구매이력없음') AS 구매제품
+  FROM USERS U, BUYS B
+ WHERE U.USER_ID = B.USER_ID(+);
+
+SELECT U.USER_NAME AS 고객명, NVL(B.PROD_NAME, '구매이력없음') AS 구매제품
+  FROM USERS U LEFT OUTER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID;
+
+-- 9. 제품을 구매한 이력이 있는 고객의 고객아이디, 고객명, 총 구매횟수를 조회하시오.
+SELECT U.USER_ID AS 아이디, U.USER_NAME AS 고객명, COUNT(*) AS 구매횟수
+  FROM USERS U, BUYS B
+ WHERE U.USER_ID = B.USER_ID
+ GROUP BY U.USER_ID, U.USER_NAME;
+
+SELECT U.USER_ID AS 아이디, U.USER_NAME AS 고객명, COUNT(*) AS 구매횟수
+  FROM USERS U INNER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ GROUP BY U.USER_ID, U.USER_NAME;
+
+-- 10. 제품을 구매한 이력이 있는 고객명과 총 구매액을 조회하시오.
+SELECT U.USER_NAME AS 고객명, SUM(B.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액
+  FROM USERS U, BUYS B
+ WHERE U.USER_ID = B.USER_ID
+ GROUP BY U.USER_ID, U.USER_NAME;
+
+SELECT U.USER_NAME AS 고객명, SUM(B.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액
+  FROM USERS U INNER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ GROUP BY U.USER_ID, U.USER_NAME;
+
+-- 11. 구매 이력과 상관 없이 고객별 구매횟수를 조회하시오.
+--     구매 이력이 없는 경우 구매횟수는 0으로 조회하시오.
+SELECT U.USER_ID AS 아이디, U.USER_NAME AS 고객명, COUNT(B.USER_ID) AS 구매횟수
+  FROM USERS U, BUYS B
+ WHERE U.USER_ID = B.USER_ID(+)
+ GROUP BY U.USER_ID, U.USER_NAME;
+
+SELECT U.USER_ID AS 아이디, U.USER_NAME AS 고객명, COUNT(B.USER_ID) AS 구매횟수
+  FROM USERS U LEFT OUTER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ GROUP BY U.USER_ID, U.USER_NAME;
+
+-- 12. 구매 이력과 상관 없이 고객별 총 구매액을 조회하시오.
+--     구매 이력이 없으면 총 구매액은 0으로 조회하시오.
+SELECT U.USER_NAME AS 고객명, NVL(SUM(B.PROD_PRICE * B.BUY_AMOUNT), 0) AS 총구매액
+  FROM USERS U, BUYS B
+ WHERE U.USER_ID = B.USER_ID(+)
+ GROUP BY U.USER_ID, U.USER_NAME;
+ 
+SELECT U.USER_NAME AS 고객명, NVL(SUM(B.PROD_PRICE * B.BUY_AMOUNT), 0) AS 총구매액
+  FROM USERS U LEFT OUTER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ GROUP BY U.USER_ID, U.USER_NAME;
+
+-- 13. 카테고리가 '전자'인 제품을 구매한 고객명과 총 구매액을 조회하시오.
+SELECT U.USER_NAME AS 고객명, SUM(B.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액
+  FROM USERS U, BUYS B
+ WHERE U.USER_ID = B.USER_ID
+   AND B.PROD_CATEGORY = '전자'
+ GROUP BY U.USER_NAME, U.USER_ID;
+
+SELECT U.USER_NAME AS 고객명, SUM(B.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액
+  FROM USERS U INNER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ WHERE B.PROD_CATEGORY = '전자'
+ GROUP BY U.USER_NAME, U.USER_ID;
+
+-- 14. 구매횟수가 2회 이상인 고객명과 구매횟수를 조회하시오.
+SELECT U.USER_NAME AS 고객명, COUNT(*) AS 구매횟수
+  FROM USERS U, BUYS B
+ WHERE U.USER_ID = B.USER_ID
+ GROUP BY U.USER_NAME, U.USER_ID
+HAVING COUNT(*) >= 2;
+
+SELECT U.USER_NAME AS 고객명, COUNT(*) AS 구매횟수
+  FROM USERS U INNER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ GROUP BY U.USER_NAME, U.USER_ID
+HAVING COUNT(*) >= 2;
+
+-- 15. USERS 테이블과 BUYS 테이블 각각의 종속 관계를 확인하고 정규화를 수행하시오.
+CREATE TABLE PRODUCT (
+    PROD_CODE     NUMBER PRIMARY KEY,
+    PROD_NAME     VARCHAR2(20) UNIQUE,
+    PROD_CATEGORY VARCHAR2(20),
+    PROD_PRICE    NUMBER
+);
+
+DROP TABLE BUYS;
+CREATE TABLE BUYS (
+    BUY_NO        NUMBER PRIMARY KEY,
+    USER_ID       VARCHAR2(20) REFERENCES USERS(USER_ID),
+    PROD_NAME     VARCHAR2(20) REFERENCES PRODUCT(PROD_NAME),
+    BUY_AMOUNT    NUMBER
+);

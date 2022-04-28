@@ -1,0 +1,206 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4771FAC8-BE0F-DD7B-82BC-951403BE9195" name="member_tbl">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>DC07D6CA-3BFF-C082-DC40-ABBCDF397D15</importedID>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="member_no" id="1B80097C-9742-42CB-B122-7AEC96B81E23">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>DF2F3919-82C0-1916-AC67-EAB82B6CAB6A</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID" id="36A992E4-88EF-FE14-ECF7-F10FD9D7A573">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>15F7E8AB-1B70-C3FF-B0E1-510525B9303F</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pw" id="6891BAFE-6EFD-FF1A-B7DE-B4EAFE612CC3">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>D4FA5670-B812-AD1D-DC3E-16B8E578285D</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>16 BYTE</dataTypeSize>
+<ownDataTypeParameters>16 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="7C4523A7-14A1-A4C2-4A7A-E030E4D33B60">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>AE732E97-EA37-5D63-8577-A17DBB3B6BAE</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nickname" id="983C23B4-2569-4E0E-EF9E-5E4D7F79F55E">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>CF3BFF32-B132-D662-385C-6ADCCACFA671</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="gender" id="16DFD714-F812-E7B7-15F9-2A42796D2A4A">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>C2EBA104-3FFE-B1F2-921B-E7421A8C7468</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tel1" id="191569BB-68D3-81BA-CF8F-67EBD0FE575D">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>6C305025-071E-CE99-393D-D714699BDDCC</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 BYTE</dataTypeSize>
+<ownDataTypeParameters>15 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tel2" id="083ACA9C-8DC9-89F0-F7CD-DAB9C815BE00">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>1B532368-75B2-A2EC-6108-4739C3F98BCA</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 BYTE</dataTypeSize>
+<ownDataTypeParameters>15 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="address" id="3D756AFB-F214-5B54-6C6D-4B393D40B72F">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>AD2FD370-6930-79A4-5CC7-770FB4C92E0E</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email" id="26E0B1E6-E0A7-5BAE-3EC2-4DA9C1094CAC">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>4351D314-DAE2-3833-811B-28373A007862</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="birthday" id="0E972689-61D8-1B0C-3633-9160CA55ED6A">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>5D58C9B3-6DFA-E93B-356F-69AA01BA2B8F</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="regist_date" id="0E02CB39-D70F-72B3-C5B1-0619DAC113C7">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>F259C6B6-F5C8-67FE-3083-00BF35FB48AC</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7DB4688B-FBBA-2CE2-5319-E6296C4A8924" name="MEMBER_TBL_PK">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>0E75EF7F-6581-10F5-4943-84D22A8A6985</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1B80097C-9742-42CB-B122-7AEC96B81E23"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DA77AD62-4CED-633C-7D98-7AD876A3964F" name="MEMBER_TBL_ID_UN">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>DA9EF5C8-4297-2A3D-585B-D64B1F43C1F5</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="36A992E4-88EF-FE14-ECF7-F10FD9D7A573"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="830B5667-C0AE-F9EE-2663-91C2831939ED" name="MEMBER_TBL_nickname_UN">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>2C5C3CC7-7AF8-B449-8EA8-3DC576926A83</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="983C23B4-2569-4E0E-EF9E-5E4D7F79F55E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="765267AE-D253-A726-BA17-72E2A33E9EF5" name="MEMBER_TBL_email_UN">
+<createdBy>wltlg</createdBy>
+<createdTime>2022-03-07 08:14:22 UTC</createdTime>
+<ownerDesignName>mymodel</ownerDesignName>
+<importedID>A9955EBB-E9FF-1C54-71B1-D00F8C5F87AB</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="26E0B1E6-E0A7-5BAE-3EC2-4DA9C1094CAC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

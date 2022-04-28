@@ -1,0 +1,27 @@
+인터페이스
+
+1. interface
+2. 추상 메소드 + default 메소드 + static 메소드 + final 상수 중 골라서 구성한다.
+3. 인터페이스 대부분의 구성 요소는 추상 메소드이다.
+4. 작업지시서의 역할을 수행한다.
+5. 특징
+	1) 상속 받는다(extends)고 표현하지 않는다.
+	2) 구현한다(implements)고 표현한다.
+	3) 여러 인터페이스를 구현할 수 있다.
+	4) 상속과 동시에 구현할 수 있다. (다중 상속의 대안)
+	5) public abstract 키워드를 생략해도 public abstract로 동작한다.
+
+PM(Project Manager)가 이렇게 interface A를 만들면
+일반 개발자(Developer)는 interface를 참고해서 실제 메소드 본문을 만든다.
+
+interface A{
+	void a();
+	void b();
+	void c();
+}
+
+class B extends A {
+	void a() { } //override
+	void b() { }
+	void c() { } 
+}

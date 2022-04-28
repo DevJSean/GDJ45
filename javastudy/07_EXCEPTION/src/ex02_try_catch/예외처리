@@ -1,0 +1,26 @@
+예외 처리
+
+1. Exception Handling
+2. 모든 예외는 예외 클래스로 존재한다.
+3. 예외가 발생되면 해당 예외 클래스 타입의 인스턴스가 발생된다.
+4. 예외 처리 코드
+	try {				 
+		코드 작성					← try 블록에서 어떤 문제가 발생하면 해당 문제가 자바에 의해서 자동으로 인스턴스화 된다.
+	} catch(타입 예외처리매개변수) {	← 그 인스턴스는 자동으로 catch 매개변수로 던져진다(throw). try에 의해 던져지고 catch는 잡고.
+		예외처리 코드 작성
+	}
+5. 자바의 모든 예외 클래스는 Exception 클래스를 상속 받는다. -> Exception을 상속받게 하면 그 클래스는 예외 클래스가 된다.
+6. 2개 이상의 예외를 처리하는 방식
+	1) catch 블록을 2개 이상 배치하기
+	2) Exception 클래스를 매개변수 타입으로 선언
+
+
+
+	try {				 
+		NullPointerException instance;
+					↓
+	} catch(NullPointerException instance) {	
+		예외처리 코드 작성
+	}
+	
+	

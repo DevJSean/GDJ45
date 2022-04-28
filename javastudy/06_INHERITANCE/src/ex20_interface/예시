@@ -1,0 +1,11 @@
+
+
+Marine extends Terran implements Bunkable
+
+Firebat extends Terran implements Bunkable
+
+Tank extends Terran
+
+Bunker(int count) {
+	Bunkable[] terrans = new Bunkable[count];
+}

@@ -1,0 +1,22 @@
+lombok.jar 학원컴에도 설치
+
+0. javastudy 복붙
+
+1. 다운받기
+https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.22
+
+2. 새폴더 만들기
+C:\GDJ45\installer\jar   
+여기에 jar 파일 넣기
+
+3. 명령 프롬프트 실행
+설치경로로 이동 
+cd C:\GDJ45\installer\jar
+자르파일 실행 명령
+java -jar lombok-1.18.22.jar
+
+4. specify location
+C:\GDJ45\installer\eclipse 여기의 eclipse.exe 선택
+install/update 
+install successful 뜨면 됨
+잘 설치되면 gdj45/installer/eclipse 폴더에 lombok.jar 생김

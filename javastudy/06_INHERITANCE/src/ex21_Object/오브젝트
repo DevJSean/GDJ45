@@ -1,0 +1,54 @@
+Object 클래스
+
+1. java.lang 패키지에 저장된 클래스이다.
+2. 모든 클래스는 별도의 상속 처리르 하지 않는다면 모두 Object 클래스를 상속 받는다.
+3. 모든 클래스들의 부모(슈퍼) 타입이다.
+	1) 모든 인스턴스는 Object 타입으로 저장할 수 있다. (upcasting)
+	2) Object 타입으로 저장한 인스턴스는 실제 인스턴스 타입으로 바꿔야 메소드를 호출할 수 있다. (downcasting)
+4. Object 클래스 주요 메소드
+	1) equals()   : 인스턴스의 참조 값을 비교해서 결과 반환
+	2) toString() : 인스턴스를 문자열로 변환해서 반환 (기본 값: 타입@참조)
+	3) getClass() : 인스턴스의 클래스 반환
+5. Object 클래스의 메소드 중 일부는 오버라이드 해서 사용한다.
+	1) equals()   : 인스턴스의 동등 비교
+	2) toString() : 인스턴스의 문자열 값 반환(사용자 정의)
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+(Object) Person	  Person
+   ↑		↑	    ↑
+Person	 Student   Alba
+
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+Person 클래스
+	eat()
+	
+Student 클래스
+	study()
+	
+Person p = new Student();
+p.eat();
+((Student)p).study();
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+Object 클래스						// 참조 값을 비교하는 것
+	boolean equals(Object obj) { }    
+  ↑
+String 클래스						// 문자열을 비교하는 것
+	boolean equals(Object obj) { }  // 기존에 쓰던 equals는 override한 것임.
+	
+
+
+Object
+	String toString() { return "class@reference"; } // 보통 오브젝트 클래스의 것을 안쓰고
+  ↑
+Person								// 이런 클래스와 메소드를 만들 수 있다.
+	String toString() { return "I am a person."; }  // 이런 식으로 오버라이드 해서 쓴다.
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+Person p1 = new Person("kim");
+Person p2 = new Person("Kim");
+
+p1.equals(p2) : before override -> false (주소만 비교하기 때문에 문자열 비교하는 게 아니고 p1과 p2의 참조 값만 본다)
+equals를 오버라이드 해서 써야한다.

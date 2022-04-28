@@ -1,0 +1,29 @@
+
+
+class parent {
+
+	void a() {}
+	void b() {}
+	
+}
+
+class Child extends Parent {
+
+	void a() {} //override
+	void b() {} //override
+	void c() {}
+
+}
+
+Parent ins = new Child ();
+ins.a(); //메소드 호출은 타입에 의해서 동작한다.(parent의 a와 b가 실행된다.)
+ins.b();
+// parent 타입의 a와 b를 호출하지만 실제 실행은 child가 가지고 있는 override된 a와 b를 실행하는 것이다.
+// 동적 바인딩. 
+
+// 현재 c는 호출할 수 없다. parent 타입에 c가 없으니까.
+// c를 호출하기 위해선 downcasting한다. parent 타입을 child타입으로 잠시 바꾼다.
+((child)ins).c(); //downcasting
+if(ins instanceof Child) {
+	((child)ins).c();
+ }

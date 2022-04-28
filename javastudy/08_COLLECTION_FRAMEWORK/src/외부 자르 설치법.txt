@@ -1,0 +1,24 @@
+lombok.jar 설치하는 법
+
+자바 프로젝트 별로 설치를 해야한다
+
+1.
+프로젝트에서 우클릭
+Build Path - Configure Build Path...
+
+2.
+Libraries 탭
+Classpath를 누르고 우측 Add External JARs.... 클릭
+GDJ45/installer/eclipse 폴더의 lombok.jar 선택
+APPLY and CLOSE
+
+3.
+프로젝트 아래에 Referenced Libraries/lombok.jar 가 생긴다.
+
+4.
+작업하는 클래스에서..
+@NoArgsConstructor  //  디폴트 생성자
+@AllArgsConstructor // Generate Constructor Using Fields
+@Getter
+@Setter
+@ToString

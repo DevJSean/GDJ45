@@ -40,6 +40,7 @@
 					tr += '<td>' + member.name + '</td>';
 					tr += '<td>' + member.gender + '</td>';
 					tr += '<td>' + member.address + '</td>';
+					tr += '<td><input type="button" value="조회" class="btnDetail"></td>';
 					tr += '</tr>';
 					memberList.append(tr);
 				})
@@ -78,7 +79,16 @@
 				// 응답
 				dataType: 'json',
 				success: function(responseText){
-					alert(responseText.res);
+					if(responseText.res == 1){
+						alert('신규 회원이 등록되었습니다.');
+						fnList(); // 신규 회원을 등록하고 fnList()를 호출해서 새로 목록을 보여주기
+						// 사용자가 input에 입력했던 정보들을 초기화
+						$('#id').val('');
+						$('#name').val('');
+						$(':radio[name="gender"]').prop('checked', false);
+						$('#address').val('');
+						
+					}
 				},
 				error: function(jqXHR){
 					alert(jqXHR.status); // 1818

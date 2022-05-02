@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.member">
+<!-- 
+	1. DTO로 받아오기   get(@getter)
+	2. MAP으로 받아오기 key
+	
+	공통적으로 
+	#{id}
+	#{name}
+	#{gender}
+	#{address}
+ -->
+	
+	<!-- 1. 회원 삽입 -->
+	<insert id="insertMember" parameterType="domain.MemberDTO">
+		INSERT INTO MEMBER
+			(NO, ID, NAME, GENDER, ADDRESS)
+		VALUES
+			(MEMBER_SEQ.NEXTVAL, #{id}, #{name}, #{gender}, #{address})
+	</insert>
+	
+	<!-- 2. 회원 목록 조회 -->
+	<select id="selectMemberList" resultType="domain.MemberDTO">
+		SELECT NO, ID, NAME, GENDER, ADDRESS
+		  FROM MEMBER
+		 ORDER BY NO DESC	
+	</select>
+
+
+</mapper>

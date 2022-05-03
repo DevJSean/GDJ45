@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import domain.MemberDTO;
 import repository.MemberDAO;
@@ -22,7 +23,9 @@ public class ListService implements MemberService {
 		response.setContentType("application/json; charset=UTF-8");
 		
 		// 응답 데이터 형식
-		// [
+		// {
+		// 	"count": 3,
+		//  "members": [
 		// 		{
 		//			"no": 1,
 		//			"id": "user1",
@@ -31,13 +34,15 @@ public class ListService implements MemberService {
 		//			"address": "seoul"
 		//		},
 		//		...
-		// ]
-		List<MemberDTO> members = MemberDAO.getInstance().selectMemberList();
-		JSONArray arr = new JSONArray(members); 
+		//   ]
+		// }
+		JSONObject obj = new JSONObject();
+		obj.put("count", MemberDAO.getInstance().getMemberCount()); // JSONObject는 put으로 넣는다
+		obj.put("members", MemberDAO.getInstance().selectMemberList()); // String key, Collection<?> value   : collection으로는 list와 set가 가능하다
 		
 		// 응답하기
 		PrintWriter out = response.getWriter();
-		out.write(arr.toString());
+		out.write(obj.toString());
 		out.flush();
 		out.close();
 	}

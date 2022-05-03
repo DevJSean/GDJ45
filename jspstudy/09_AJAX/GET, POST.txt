@@ -1,0 +1,8 @@
+GET
+SELECT
+DELETE
+
+POST
+INSERT
+UPDATE
+이미지 파일은 post 방식으로만 가능하다.

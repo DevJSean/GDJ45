@@ -16,6 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SearchService {
 
+	// 예외 시 search.jsp의 $.ajax의 error로 넘어간다.
+	private void error(HttpServletResponse response, String msg) throws IOException{
+		response.setContentType("text/plain; UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(msg);
+		out.flush();
+		out.close();
+	}
+	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		// 요청 파라미터 처리
@@ -27,8 +36,7 @@ public class SearchService {
 		try {
 			query = URLEncoder.encode(query, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// 검색어 인코딩 실패
-			// 예외 시 search.jsp의 $.ajax의 error로 넘어간다.
+			error(response, "검색어 인코딩 실패");
 		}
 		
 		// API 접속
@@ -40,9 +48,9 @@ public class SearchService {
 			url = new URL(apiURL);
 			con = (HttpURLConnection)url.openConnection();
 		} catch (MalformedURLException e) {
-			// 잘못된 형식의 apiURL을 작성했을 때
+			error(response, "잘못된 형식의 apiURL을 작성했을 때");
 		} catch (IOException e) {
-			// apiURL 연결 실패했을 때
+			error(response, "apiURL 연결 실패했을 때");
 		}
 		
 		// 요청 header + method
@@ -50,9 +58,8 @@ public class SearchService {
 			con.setRequestMethod("GET"); // 대문자로 작성
 			con.setRequestProperty("X-Naver-Client-Id", "C4eZVVUAQJzuEShVgST4");
 			con.addRequestProperty("X-Naver-Client-Secret", "v8KS5FKYHn");
-			
 		} catch (Exception e) {
-			// 신경 쓰지 않는다.
+			error(response, "API 요청 실패");
 		}
 		
 		// 응답할 스트림(성공하면 정상 스트림, 실패하면 에러 스트림)
@@ -74,7 +81,7 @@ public class SearchService {
 			}
 			br.close();
 		} catch (IOException e) {
-			// API 응답 실패
+			error(response, "API 응답 실패");
 		}
 		
 		// API연결 종료 (네이버 측과 할 일이 끝남)

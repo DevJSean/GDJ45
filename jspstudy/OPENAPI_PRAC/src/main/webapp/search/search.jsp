@@ -34,8 +34,10 @@
 						tr += '<td>' + product.mallName + '</td>';
 						tr += '</tr>';
 						$('#products').append(tr); // $(tr).appendTo('#products');
-						
 					})
+				},
+				error: function(jqXHR){
+					alert(jqXHR.responseText);
 				}
 			})
 		})

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class SearchService {
+public class SearchService implements OpenAPIService {
 
 	// 예외 시 search.jsp의 $.ajax의 error로 넘어간다.
 	private void error(HttpServletResponse response, String msg) throws IOException{
@@ -24,7 +24,8 @@ public class SearchService {
 		out.flush();
 		out.close();
 	}
-	
+
+	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		// 요청 파라미터 처리
@@ -94,6 +95,6 @@ public class SearchService {
 		out.write(sb.toString());
 		out.flush();
 		out.close();
-		
+			
 	}
 }

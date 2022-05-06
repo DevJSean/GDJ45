@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.goodee.ex01.xml03.MyConnection" id="oracleConnection">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" /> <!-- ojdbc6 jar 파일이 있어야 함, 프로젝트에 우클릭 - configure Build Path로 자르 파일 add했다.  -->
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="userName" value="SCOTT" />
+		<property name="password" value="1111" />
+	</bean>
+
+
+</beans>

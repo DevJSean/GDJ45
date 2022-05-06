@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- field와 setter만 있으면 된다. -->
+
+	<bean class="com.goodee.ex01.xml02.Engine" id="engine1" scope="prototype"> <!-- 엔진을 매번 새로 만들기 (prototype) -->
+		<property name="fuel">
+			<value>디젤</value>
+		</property>
+		<property name="efficiency">
+			<value>10.5</value>
+		</property>
+		<property name="hp" value="340" />
+		<property name="cc" value="2993" />
+	</bean>
+
+	<bean class="com.goodee.ex01.xml02.Car" id="bmw_x7" scope="prototype"> <!-- 차를 매번 새로 만들기 (prototype) -->
+		<property name="model">
+			<value>xdrive_40d</value>
+		</property>
+		<property name="price" value="13140" />
+		<property name="engine">
+			<ref bean="engine1"/>
+		</property>
+	</bean>
+
+
+</beans>

@@ -1,0 +1,80 @@
+New Spring Legacy Project
+	Spring MVC project 선택
+
+Enter a TopLevelPackage.
+	3수준 이상의 패키지를 작성해야 프로젝트를 만들 수 있다.
+	base package : com.goodee.ex01
+	group id : com.goodee
+	context path(artifact id) : ex01
+	Spring에서는 패키지이름(앱이름)이 Context Path로 사용된다. 패키지 이름은 소문자만 돼서 context path가 소문자로 구성된다. 
+	그러므로 context path인 artifact id는 unique하게 만들어야 한다
+	
+	"/ex01/list.do"
+	패키지 경로는 com.goodee.ex01.controller의 식으로 구성될 것
+
+Spring Legacy Proejct 구성
+src/main/java                  java 파일
+src/main/resources             xml(context,mybatis...) 파일
+src/test/java                  TestCase(JUnit)
+src/test/resources             JUnit할 때 필요한 리소스(보통 없다)
+
+src/main/webapp                web root (웹 폴더)
+src/main/webapp/resources      static file(이미지파일, css, js...)
+
+src/main/webapp/WEB-INF/views  jsp파일
+pom.xml 파일                   사용할 라이브러리 등록(jar)
+
+pom.xml
+※ JavaSE-1.6 버전을 JavaSE-11버전으로 수정해야 한다.
+pom.xml은 저장하면 인터넷 접속, 다운로드를 하기 때문에
+저장은 항상 모든 작업을 완료한 다음에 한다.
+properties에 등록하면 그 태그의 이름을 EL(${})로 밑에서 사용하여 해당 태그에 해당되는 텍스트를 불러올 수 있다.
+properties 태그에서는 가종 version을 세팅하는데 각 version이 release된 날짜를 보고 맞추는 게 좋다.
+spring이 기준 version이고 다른 것들은 spring과 같은 날짜 또는 이전에 배포된 날짜로 맞춘다
+https://mvnrepository.com/ (메이븐 레파지토리)는 jar 저장소인데 여기서 검색한다.
+여기서는 2021년 1월 기준
+이 때 jar 중에 알파,베타 버전인 것은 사용하지 않는다.(개발 중임)
+<properties>
+	<java-version>11</java-version>
+	<org.springframework-version>5.3.3</org.springframework-version>
+	<org.aspectj-version>1.9.6</org.aspectj-version>
+	<org.slf4j-version>1.7.30</org.slf4j-version>
+</properties>
+dependencies에 원하는 자르를 dependency 태그로 작성하면 스프링이 알아서 다운로드 해준다.
+Servlet 부분에서 artifactId와 version을 최신버전으로 수정해야 한다.
+<dependency>
+	<groupId>javax.servlet</groupId>
+	<artifactId>javax.servlet-api</artifactId>
+	<version>4.0.1</version>
+	<scope>provided</scope>
+</dependency>
+Test - JUnit
+JUnit4는 version만 올리면 되고, JUnit5는 groupID, artifactId도 바꿔야 한다.
+<dependency>
+	<groupId>junit</groupId>
+	<artifactId>junit</artifactId>
+	<version>4.13.1</version>
+	<scope>test</scope>
+</dependency>    
+plugin에서 java version으로 source와 target을 바꾼다.
+<plugin>
+     <groupId>org.apache.maven.plugins</groupId>
+     <artifactId>maven-compiler-plugin</artifactId>
+     <version>2.5.1</version>
+     <configuration>
+          <source>${java-version}</source>
+          <target>${java-version}</target>
+          <compilerArgument>-Xlint:all</compilerArgument>
+          <showWarnings>true</showWarnings>
+          <showDeprecation>true</showDeprecation>
+     </configuration>
+</plugin>
+
+pom.xml의 변경사항을 반영하려면
+파일 저장, 프로젝트 우클릭 [Maven] - [Update Project]를 해야 한다.
+반영이 되면 JRE System Libarary [JavaSE-11]로 바뀐다.
+
+home.jsp는 개판이다.
+HomeController는 servlet이 아니다. 일반 자바 파일로 만든다.
+
+

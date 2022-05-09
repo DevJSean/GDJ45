@@ -1,6 +1,3 @@
-Bean 만드는 방법 2가지
-
-1. XML
 src/main/resources 에 xml 폴더 생성
 xml 폴더에 Spring Bean Configuration File 생성 (context01.xml)
 
@@ -27,6 +24,4 @@ eCalculator1.setCalculator(calculator1);
      		<ref bean="calculator1"/>
      	</property>
      </bean>
--------------------------------------------------------------------------------
 
-2. Java

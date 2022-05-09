@@ -11,8 +11,7 @@
 	<!-- jar를 받아 주는 파일이다. 자주 저장하면 자주 다운 받으므로 오류가 날 확률이 높다 -->
 	<!-- 저장을 한 다음에는 다운로드가 완료될 때까지 기다려야 한다 -->
 	
-	<!-- pom.xml의 수정된 내용을 반영하려면 [Maven] - [Update Project]를 해야 한다. -->
-	
+	<!-- pom.xml의 수정된 내용을 반영하려면 프로젝트 우클릭 -  [Maven] - [Update Project]를 해야 한다. -->
 	
 	<!-- properties 태그에서는 가종 version을 세팅하는데 각 version이 release된 날짜를 보고 맞추는 게 좋다. -->
 	<!-- spring이 기준 version이고 다른 것들은 spring과 같은 날짜 또는 이전에 배포된 날짜로 맞춘다 -->

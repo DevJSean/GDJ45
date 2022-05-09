@@ -1,0 +1,8 @@
+java로 bean을 만드는 게 추세이다.
+
+1. 같은 패키지에 SpringBeanConfig.java(이름 자유) 클래스 파일을 만든다.
+2. 	@Configuration
+	Bean을 만드는 java class 파일이다.
+	spring bean configuration file과 같은 역할을 한다.
+3. 메소드 1개가 bean 1개이다.
+SpringMain으로 확인

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		scores만 결정하면 average와 grade가 자동으로 작성되도록 해야 한다.
+		종속 관계..
+		
+		<property name="scores">    setScores를 호출하는 곳, setScores에서 해결한다.
+			<list>                   public void setScores(List...)em
+				<value>10</value>
+				...
+		</property>
+		<property name="average">   setAverage와 setGrade는 필요 없다.
+				<value>???</value>
+		</property>
+		<property name="grade">
+				<value>???</value>
+		</property>
+	
+	 -->
+
+
+	<!-- Exam -->
+	<bean class="com.goodee.ex01.xml05.Exam" id="exam">
+		<!-- setScores를 호출하는 property 하나만 있으면 된다. -->
+		<property name="scores">
+			<list>
+				<value>13</value>
+				<value>26</value>
+				<value>39</value>
+				<value>52</value>
+				<value>65</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Student -->
+	<bean class="com.goodee.ex01.xml05.Student" id="stu">
+		<property name="name">
+			<value>철수</value>
+		</property>
+		<property name="exam">
+			<ref bean="exam"/>
+		</property>
+		<property name="pInfo">
+			<map>
+				<entry key="address" value="seoul"/>
+				<entry key="phone" value="010-1111-2222"/>
+			</map>
+		</property>
+	</bean>
+
+</beans>

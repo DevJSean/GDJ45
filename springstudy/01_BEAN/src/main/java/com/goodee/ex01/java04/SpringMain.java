@@ -7,7 +7,7 @@ public class SpringMain {
 
 	public static void main(String[] args) {
 
-		AbstractApplicationContext ctx = new GenericXmlApplicationContext("java/book_context.xml");
+		AbstractApplicationContext ctx = new GenericXmlApplicationContext("java/book-context.xml");
 		
 		
 		Book book1 = (Book)ctx.getBean("book1");

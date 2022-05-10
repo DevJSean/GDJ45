@@ -78,3 +78,16 @@ home.jsp는 개판이다.
 HomeController는 servlet이 아니다. 일반 자바 파일로 만든다.
 
 
+
+------------------------------------------
+Spring Legacy Project import 방법
+
+폴더 자체를 바탕화면에 받고
+
+Spring에서 import - General - existing Projects into workspace
+
+browse에서 폴더를 선택하고
+
+projects 선택하고
+
+options에 copy projects into workspace를 선택한다.

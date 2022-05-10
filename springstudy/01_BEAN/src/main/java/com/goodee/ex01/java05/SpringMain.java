@@ -8,7 +8,7 @@ public class SpringMain {
 
 	public static void main(String[] args) {
 
-			AbstractApplicationContext ctx = new GenericXmlApplicationContext("java/soldier_context.xml");
+			AbstractApplicationContext ctx = new GenericXmlApplicationContext("java/soldier-context.xml");
 		
 			Soldier s1 = ctx.getBean("soldier1", Soldier.class);
 			s1.info();

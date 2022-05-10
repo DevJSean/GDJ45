@@ -1,0 +1,103 @@
+				index 유무	중복 허용	요소 추가	요소 반환
+List(ArrayList, Linked List)	O		O		add()		get(i)
+Set(HashSet)			X		X		add()		Iterator 사용해야 한다.
+Map(HashMap)			X		X		put(k, v)	get(k)
+
+
+
+
+1. List 
+
+-순서가 있다
+-값의 중복 허용
+-배열 기반 (index 사용) 
+-ArrayList class, LinkedList class
+
+List<String> list = new ArrayList<String>();
+-주요 메소드
+list.​add()
+list.​get()
+list.size()
+list.remove()
+list.set(int index, ""): 수정
+list.clear(): 모든 요소를 삭제
+
+// 일반 for문
+for(int i = 0, size = list.size(); i < size; i++) {
+	System.out.println(list.get(i)); 
+}	
+// 향상 for문
+for(String element : list) {
+	System.out.println(element);
+}
+-----------------------------------------------------------------------
+2. Set
+
+- 순서가 없다
+- 값의 중복 X
+- get() 메소드 X
+- HashSet class
+
+Set<String> set = new HashSet<String>();
+- 주요 메소드
+set.add()
+set.size()
+set.remove()
+set.set(int index, "")
+set.clear()
+
+- 향상 for문 순회(index가 없으므로 향상 for문만 가능)
+for(String str : set) {
+	System.out.println(str); }
+
+- HashSet 클래스의 중복 요소 여부 판단
+	hashCode() 메소드를 호출해서 해시(Hash)값을 확인한다.
+		- 동일한 해시 : 중복된 요소일 가능성이 있다. 추가로 equals()비교를 한다.
+		- 다른 해시 : 중복된 요소가 아님 확정. 더 이상 비교 안함.
+	equals() 메소드를 호출해서 동등 비교를 수행함.
+	실무에서는 hashCode(), equals() 메소드를 동시에 자동 생성함.
+
+- 요소 반환
+Set<String> set = new HashSet<String>(Arrays.asList("국어", "영어", "수학"));
+Iterator<String> itr = set.iterator(); 
+- 반복자 사용
+- hasNext() : 존재하는 데이터 유무 반환
+- next() : hasNext()로 파악한 데이터 자체 반환
+while(itr.hasNext()) { //잡히는 게 있으면
+	String element = itr.next(); //그것을 빼서 element에 저장하고
+	System.out.println(element); //출력
+}
+
+-----------------------------------------------------------------------
+3. Map
+
+- 순서가 없다
+- Key와 Value 
+- key는 중복 X
+- value는 중복 O
+- HashMap class
+
+Map<String, String> map = new HashMap<String, String>();
+-주요메소드
+map.put(key,value) : key로 Value 추가, key가 중복이면 value를 수정 
+map.get(key) : key로 value 반환 
+map.clear() : 전체 요소 삭제 
+map.remove(key) : key가 일치하는 요소 삭제 
+map.remove(key,value) : key와 value가 모두 일치해야 요소 삭제 
+map.keySet() : key들을 Set<> 타입으로 변경
+
+- Map의 순회-1
+Set<String> keys = map.keySet(); // 키를 Set로 만들어주는 메소드
+for(String key : map.keySet()) {
+	System.out.println("키 " + key + ", 값 " + map.get(key));
+}
+- Map의 순회-2 (entry)
+for(Map.Entry<String, Object> entry : map.entrySet())
+	System.out.println("키 " + entry.getKey() + ", 값 " + entry.getValue());
+
+- HashMap 클래스의 중복 요소 여부 판단
+	hashCode() 메소드를 호출해서 해시(Hash)값을 확인한다.
+		- 동일한 해시 : 중복된 요소일 가능성이 있다. 추가로 equals()비교를 한다.
+		- 다른 해시 : 중복된 요소가 아님 확정. 더 이상 비교 안함.
+	equals() 메소드를 호출해서 동등 비교를 수행함.
+	실무에서는 hashCode(), equals() 메소드를 동시에 자동 생성함.

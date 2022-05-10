@@ -28,6 +28,7 @@ pom.xml
 ※ JavaSE-1.6 버전을 JavaSE-11버전으로 수정해야 한다.
 pom.xml은 저장하면 인터넷 접속, 다운로드를 하기 때문에
 저장은 항상 모든 작업을 완료한 다음에 한다.
+dependencies에 원하는 자르를 dependency 태그로 작성하면 스프링이 알아서 다운로드 해준다.
 properties에 등록하면 그 태그의 이름을 EL(${})로 밑에서 사용하여 해당 태그에 해당되는 텍스트를 불러올 수 있다.
 properties 태그에서는 가종 version을 세팅하는데 각 version이 release된 날짜를 보고 맞추는 게 좋다.
 spring이 기준 version이고 다른 것들은 spring과 같은 날짜 또는 이전에 배포된 날짜로 맞춘다
@@ -40,35 +41,43 @@ https://mvnrepository.com/ (메이븐 레파지토리)는 jar 저장소인데 �
 	<org.aspectj-version>1.9.6</org.aspectj-version>
 	<org.slf4j-version>1.7.30</org.slf4j-version>
 </properties>
-dependencies에 원하는 자르를 dependency 태그로 작성하면 스프링이 알아서 다운로드 해준다.
+
 Servlet 부분에서 artifactId와 version을 최신버전으로 수정해야 한다.
+<!-- Servlet -->
+<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 <dependency>
-	<groupId>javax.servlet</groupId>
-	<artifactId>javax.servlet-api</artifactId>
-	<version>4.0.1</version>
-	<scope>provided</scope>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version>
+    <scope>provided</scope>
 </dependency>
+
 Test - JUnit
 JUnit4는 version만 올리면 되고, JUnit5는 groupID, artifactId도 바꿔야 한다.
+<!-- Test -->
+<!-- https://mvnrepository.com/artifact/junit/junit -->
 <dependency>
-	<groupId>junit</groupId>
-	<artifactId>junit</artifactId>
-	<version>4.13.1</version>
-	<scope>test</scope>
-</dependency>    
-plugin에서 java version으로 source와 target을 바꾼다.
-<plugin>
-     <groupId>org.apache.maven.plugins</groupId>
-     <artifactId>maven-compiler-plugin</artifactId>
-     <version>2.5.1</version>
-     <configuration>
-          <source>${java-version}</source>
-          <target>${java-version}</target>
-          <compilerArgument>-Xlint:all</compilerArgument>
-          <showWarnings>true</showWarnings>
-          <showDeprecation>true</showDeprecation>
-     </configuration>
-</plugin>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.1</version>
+    <scope>test</scope>
+</dependency>
+
+	<!--plugin에서 java version으로 source와 target을 바꾼다.-->
+	<build>
+	<plugin>
+     		<groupId>org.apache.maven.plugins</groupId>
+     		<artifactId>maven-compiler-plugin</artifactId>
+     		<version>2.5.1</version>
+    		<configuration>
+         		<source>${java-version}</source>
+          		<target>${java-version}</target>
+          		<compilerArgument>-Xlint:all</compilerArgument>
+          		<showWarnings>true</showWarnings>
+          		<showDeprecation>true</showDeprecation>
+     		</configuration>
+	</plugin>
+	</build>
 
 pom.xml의 변경사항을 반영하려면
 파일 저장, 프로젝트 우클릭 [Maven] - [Update Project]를 해야 한다.

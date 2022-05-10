@@ -1,0 +1,84 @@
+web.xml             : dispatcher servlet 동작해라
+root-context.xml    : bean 있는 곳
+servlet-context.xml : dispatcher servlet이 읽는 정보가 있는 곳
+
+--------------------------------root-context.xml---------------------------------------------
+web.xml을 보면
+/WEB-INF/spring/root-context.xml이 Spring Container로 잡혀있다.
+spring bean configuration file이다.
+
+-----------------------------------web.xml---------------------------------------------------
+	Processes application requests
+	DispatcherServlet은 이름을 appServlet이라고 지었다.
+	DispatcherServlet은 동작할 때 servlet-context.xml의 내용을 읽는다.
+
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+---------------------------------------------------------------------------------------------
+	MVC pattern에서 요청을 받는 건 controller
+	Spring에서 요청을 받는 건 DispatcherServlet
+	user ->  (DispatcherServlet) -> controller
+  	appServlet은 contextPath 경로(url-pattern의 슬래시(/)를 의미)에서 동작한다. (http://localhost:9090/ex02)
+		/ : context Path 경로
+	contextpath는 주소에서 무조건 붙기 때문에 프로젝트를 실행하면 Dispatcherservlet를 동작한다는 의미
+
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+
+
+-------------------------------servlet-context.xml-------------------------------------------
+servlet-context는 DispatcherServlet이 읽어서 처리하는 정보를 가지고 있다.
+그리고, Bean도 등록할 수 있다, 대신 <beans:bean>으로 등록한다.
+
+		DispatcherServlet
+		1. User <-> DispatcherServlet <-> controller
+		2. static resource 관리 (web 자원)
+		3. ViewResolver  동작
+		4. base package 지정
+
+---------------------------------------------------------------------------------------------
+@Controller를 붙이면 mvc pattern의 controller로 작동하도록 해준다.
+com.goodee.ex02의 HomeController를 보면 @Controller가 붙어 있는 것을 볼 수 있다.
+
+---------------------------------------------------------------------------------------------
+src/main/webapp : ${webappRoot}
+src/main/webapp/resources : ${webappRoot}/resources
+static resource : images, CSS, js 등
+webapp 밑의 resources 디렉토리에 images, CSS, js를 담아야 한다.
+
+----------------------------------------------------------------------------------------------
+<beans:bean>은 <bean>과 같다
+뷰 리졸버(ViewResolver)
+		
+스프링에서는 controller가 list.jsp로 이동하고자 할 때 return "list"; 라고 한다.
+그러면 뷰 리졸버가 "list"앞(prefix)에 "/WEB-INF/views/"를 붙이고,
+"list"뒤(suffix)에 ".jsp"를 붙여서 이동한다.
+
+최종적으로 이동하는 경로는 '/WEB-INF/views/list.jsp"이다.
+com.goodee.ex02의 HomeController를 보면 return에 경로, .jsp 없이 home만 붙어있다.
+
+결론) 모든 jsp 파일은 /WEB-INF/views 디렉터리에 저장해야 한다.
+
+-----------------------------------------------------------------------------------------------
+<context:component-scan base-package="com.goodee.ex02" />
+
+모든 구성 요소(component)는 com.goodee.ex02 패키지에 포함되어야 한다.
+base package이다.
+		com.goodee.ex02
+		com.goodee.ex02.common
+		com.goodee.ex02.controller
+		com.goodee.ex02.domain
+		com.goodee.ex02.repository
+		com.goodee.ex02.service

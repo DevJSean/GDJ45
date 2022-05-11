@@ -6,6 +6,13 @@
 
 // 메소드 1개 = 요청 1개, 응답 1개
 
+	// Spring4부터 새로운 애너테이션이 지원된다.
+	
+	// @GetMapping("/") == 	@RequestMapping(value="/", method = RequestMethod.GET)
+	// @PostMapping("/") == @RequestMapping(value="/", method = RequestMethod.POST)
+	
+	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	// 1. URLMapping을 처리하는 애너테이션
 	// 2. 메소드마다 하나씩 가져야 한다.

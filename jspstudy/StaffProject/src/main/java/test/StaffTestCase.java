@@ -11,7 +11,7 @@ import repository.StaffDAO;
 class StaffTestCase {
 
 	@BeforeEach
-	void 등록테스트() {
+	void 직원등록테스트() {
 		
 		StaffDTO staff = StaffDTO.builder()
 				.sno("99999")
@@ -19,20 +19,17 @@ class StaffTestCase {
 				.dept("기획부")
 				.salary(5000)
 				.build();
-		int res = 0;
-		try {
-			res = StaffDAO.getInstance().insertStaff(staff);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		assertEquals(1, res, "사원 등록에 문제가 있습니다.");
+		
+		int res = StaffDAO.getInstance().addStaff(staff);
+		assertEquals(1, res, "직원등록실패");
 	}
 	
-	
+
 	@Test
-	void 조회테스트() {
+	void 직원조회테스트() {
+		StaffDTO staff = null;
+		staff = StaffDAO.getInstance().detailStaff("99999");
 		
-		StaffDTO staff = StaffDAO.getInstance().selectStaffByNo("99999");
 		assertNotNull(staff);
 	}
 

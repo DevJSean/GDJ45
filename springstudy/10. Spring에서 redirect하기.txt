@@ -1,0 +1,61 @@
+	// redirect 하는 방법
+	
+	// redirect는 JSP로 이동하지 않는다.
+	// redirect는 다른 매핑으로 이동한다.
+
+	////////////////////////////////////////////////////////////////////////////
+	//  forward는 JSP로 이동                                                  //
+        //             return "list"; -> /WEB-INF/views/list.jsp                  //
+	//  redirect는 매핑으로 이동                                              //
+        //             return "redirect:/list"; -> http:localhost:9090/ex04/list  //
+	////////////////////////////////////////////////////////////////////////////
+
+1. request
+	// redirect는 GetMapping이 두 번
+	@GetMapping("/list3")
+	public String list3(HttpServletRequest request) {   // Model model은 forward할 때 쓰기 때문에 필요 없다.
+		
+		// redirect할 때 데이터를 전달하려면 파라미터를 붙여줘야 한다.
+		String page = request.getParameter("page");
+		
+		return "redirect:/list4?page=" + page;   // 파라미터를 직접 붙여줘야 한다.
+	}
+	@GetMapping("/list4")
+	public String list4(HttpServletRequest request, Model model) {
+		
+		String page = request.getParameter("page");
+		
+		model.addAttribute("page", page);
+		
+		return "list";
+	}
+2. @RequestParam()
+	// redirect는 GetMapping이 두 번
+	@GetMapping("/list3")
+	public String list3(int page) {
+		
+		// redirect할 때 데이터를 전달하려면 파라미터를 붙여줘야 한다.
+		return "redirect:/list4?page=" + page;
+	}
+	@GetMapping("/list4")
+	public String list4(int page, Model model) {
+		
+		model.addAttribute("page", page);
+		
+		return "list";
+	}
+3. RedirectAttributes 인터페이스, addFlashAttribute() 메소드 사용
+	@GetMapping("/list5")
+	public String list5(int page, 
+                            RedirectAttributes redirectAttributes) { // redirect 할 곳으로 데이터를 전송해 줄 수 있다.
+		 
+		// addAttribute()를 쓰면 redirect 할 때 전달이 안 된다.
+		// addFlashAttribute()를 써야 한다.
+		redirectAttributes.addFlashAttribute("page", page);  // page 파라미터를 안 붙여도 전달된다.
+		
+		return "redirect:/list6";
+	}
+	@GetMapping("/list6")
+	public String list6() {
+		return "list"; // list.jsp로 forward 한다
+	}

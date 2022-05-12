@@ -11,51 +11,66 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import domain.StaffDTO;
 
 public class StaffDAO {
-
+	
+	// singleton, factory 작업
+	
+	// field
 	private SqlSessionFactory factory;
+	
+	// 싱글톤 작업
 	private static StaffDAO instance = new StaffDAO();
 	
-	private StaffDAO() {
+	// 생성자
+	public StaffDAO() {
 		try {
-			String resource = "mybatis/config/mybatis-config.xml";
+			String resource ="mybatis/config/mybatis-config.xml";
 			InputStream inputStream = Resources.getResourceAsStream(resource);
-			factory = new SqlSessionFactoryBuilder().build(inputStream);
+			factory = new SqlSessionFactoryBuilder().build(inputStream);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public static StaffDAO getInstance() {
 		return instance;
 	}
-			
+	
+	private final String MAPPER = "mybatis.mapper.staff.";
+	
+	// 메소드!
+	// 모든 메소드들은 factory로 부터 SqlSession을 얻는다!
+	// SqlSession ss = facotry.openSession();
+	// ss.select~~.. 등등
+	// ss.close()
 	
 	
-	// 1. 전체 사원 조회
-	public List<StaffDTO> selectStaffList() {
+	public List<StaffDTO> selectStaffList(){
+		
 		SqlSession ss = factory.openSession();
-		List<StaffDTO> staffs = ss.selectList("mybatis.mapper.staff.selectStaffList");
-		ss.close();
-		return staffs;
+		List<StaffDTO> staffList = ss.selectList(MAPPER + "selectStaffList");
+		ss.close();		
+		
+		return staffList;
 	}
 	
-	// 2. 사원 번호로 조회
-	public StaffDTO selectStaffByNo(String searchSno) {
+	public StaffDTO detailStaff(String sno) {
+		
 		SqlSession ss = factory.openSession();
-		StaffDTO staff = ss.selectOne("mybatis.mapper.staff.selectStaffByNo", searchSno);
+		StaffDTO staff = ss.selectOne(MAPPER + "detailStaff", sno);
 		ss.close();
+		
 		return staff;
 	}
 	
-	// 3. 사원 등록
-	public int insertStaff(StaffDTO staff) {
+	public int addStaff(StaffDTO staff) {
 		SqlSession ss = factory.openSession(false);
-		int res = ss.insert("mybatis.mapper.staff.insertStaff", staff);
-		if(res > 0) {
-			ss.commit();
-		}
+		int res = ss.insert(MAPPER + "addStaff", staff);
+		if(res>0) ss.commit();
 		ss.close();
+		
 		return res;
 	}
 	
+
 	
 }

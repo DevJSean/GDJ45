@@ -1,0 +1,14 @@
+
+
+JACKSON은 JAVA의 Bean이나 Collection을 쉽게 JSON/XML 데이터 타입으로 변환해준다.
+
+
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.12.1</version>
+		</dependency>
+
+

@@ -1,8 +1,8 @@
 ======================
 파라미터 처리 방법
-1. request
-2. 매개변수 : String name, int age
-3. domain   : Member member 파라미터를 담을 수 있는 domain
+1. request     : HttpServletRequest request
+2. 매개변수    : String name, int age
+3. domain(dto) : Member member 파라미터를 담을 수 있는 domain
 ======================
 Forward 처리 방법
 1.(JSP) HttpServletRequest request

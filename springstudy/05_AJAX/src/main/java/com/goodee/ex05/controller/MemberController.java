@@ -27,26 +27,10 @@ public class MemberController {
 	
 	// DI를 사용하는 경우(스프링 컨테이너에 있는 bean을 스프링이 주입하는 방법)  @Autowired
 	// root-context.xml에 등록한 Bean을 스프링이 가져오는 방법
-	// ↓  1. 필드 2. 생성자 3. setter 방식 중 필드 주입 방식 사용
+	// ↓  1. 필드 2. 생성자 3. setter 방식 중   1. 필드 주입 방식 사용
 	@Autowired
-	private MemberService memberService;
-		
-	
-	@GetMapping(value="/")
-	public String index() {
-		return "index";  // index.jsp
-	}
-	
-	@GetMapping(value="/member")
-	public String member() {
-		return "member";  // member.jsp
-	}
-	
-	@GetMapping(value="/board") // 이동하는 매핑을 따로 모아두는 것이 좋다.
-	public String board() {
-		return "board";
-	}
-	
+	private MemberService memberService; // root-context.xml의 bean id와 이름 맞춘다.
+
 	
 	// 컨트롤러의 메소드는 기본적으로 JSP의 이름을 반환한다.
 	// MVC 처리, 페이지 이동, JSP 이름

@@ -34,6 +34,9 @@ import com.goodee.ex05.service.BoardService;
 public class BoardController {
 	
 	/*
+	// DI를 사용하는 경우(스프링 컨테이너에 있는 bean을 스프링이 주입하는 방법)  @Autowired
+	// root-context.xml에 등록한 Bean을 스프링이 가져오는 방법
+	// ↓  1. 필드 2. 생성자 3. setter 방식 중     2. 생성자 방법
 	private BoardService boardService;
 	
 	// 생성자는 @Autowired를 안 적어도 됩니다.
@@ -44,9 +47,8 @@ public class BoardController {
 	 */
 	
 	@Autowired
-	private BoardService boardService;
+	private BoardService boardService; // root-context.xml의 bean id와 이름 맞춘다.
 	
-
 	
 	@GetMapping(value="/board/detail1", produces="application/json; charset=UTF-8")
 	//@ResponseBody (@RestController 사용하면 안 적어도 된다.)

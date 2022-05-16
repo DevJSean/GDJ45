@@ -5,8 +5,25 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-	<!-- MemberServiceImpl -->
-	<bean class="com.goodee.ex05.service.MemberServiceImpl" id="MemberService"/>
+	<!-- MemberServiceImpl --> 
+	<!-- 
+		Controller에서 class를 보고 불러온다. 
+	    						@Autowired
+								private MemberService memberService;
+		             						 ↑ 
+		                                     ↑ 	                             -->
+	<bean class="com.goodee.ex05.service.MemberServiceImpl" id="memberService"/> <!-- id는 Controller에서 불러올 때 달라도 상관이 없다. 하지만 실무에선 같은 이름이 좋다 -->
 	
-	<bean class="com.goodee.ex05.service.BoardServiceImpl" id="BoardService"/>
+	<!-- BoardServiceImpl -->
+	<bean class="com.goodee.ex05.service.BoardServiceImpl" id="boardService"/>
+	
+	<!-- ProductServiceImpl -->
+	<bean class="com.goodee.ex05.service.ProductServiceImpl" id="productService"/>
+	
+	<!-- ReservationServiceImpl -->
+	<bean class="com.goodee.ex05.service.ReservationServiceImpl" id="reservationService" />
+	
+	<!-- OpenApiServiceImpl -->
+	<bean class="com.goodee.ex05.service.OpenApiServiceImpl" id="openApiService" />
+	
 </beans>

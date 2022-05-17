@@ -1,12 +1,16 @@
 package com.goodee.ex05.service;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 
 import com.goodee.ex05.domain.ReservationDTO;
 
@@ -57,10 +61,49 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ResponseEntity<ReservationDTO> detail3(ReservationDTO reservation) {
+	public ResponseEntity<ReservationDTO> detail3(ReservationDTO reservation) { // DTO지만 번호만 들어있다.
 		
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-type", MediaType.APPLICATION_JSON_VALUE);  // "application/json"
 		
-		return null;
+		// no가 100을 초과하면 저장할 수 없는 데이터로 가정
+		ResponseEntity<ReservationDTO> result = null;
+		
+		if(reservation.getNo() > 100) {
+			result = new ResponseEntity<>(null, null, HttpStatus.INTERNAL_SERVER_ERROR); // 내부 서버 에러 status : 500번
+		} else {
+			result = new ResponseEntity<>(new ReservationDTO(reservation.getNo(),"예약자"), header, HttpStatus.OK);
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public ResponseEntity<byte[]> image() {
+		// 꺽쇠 괄호에는 primitive type이 올 수 없고, reference type만 가능하다.
+		// 모든 배열은 reference type이다.
+		File file = new File("D:", "Pikachu.jpg"); // new File("C:\\Pikachu.jpg")
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			// C:\\Pikachu.jpg 파일을 복사해서 byte[] 배열에 저장하고 해당 byte[] 배열을 반환
+			// copyToByteArray()는 file 타입만 받는다.
+			byte[] b = FileCopyUtils.copyToByteArray(file); // 이걸 반환하면 된다.
+			
+			// HttpHeaders : 반환할 데이터의 Content-Type 작성
+			// jpg 이미지의 Content-Type은 image/jpeg이다.
+			HttpHeaders header = new HttpHeaders();
+			String contentType = Files.probeContentType(file.toPath());
+			header.add("Content-Type", contentType);
+			
+			// 반환할 ResponseEntity
+			result = new ResponseEntity<>(b, header, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

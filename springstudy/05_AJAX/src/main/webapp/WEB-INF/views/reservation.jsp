@@ -74,7 +74,35 @@
 	} // fnAjax2
 	
 	function fnAjax3(){
-		
+		// 요청 JSON, 응답 ResponseEntity로 하기
+		// no=1 요청하면 no=1, name=예약자 반환받기
+		$.ajax({
+			/* 요청 */
+			url: '${contextPath}/reservation/detail3',
+			type: 'post',
+			data: JSON.stringify({
+				'no': $('#no').val()
+			}),
+			contentType: 'application/json',
+			
+			/* 응답 */
+			dataType: 'json',
+			success: (reservation) => {
+				$('#result').empty();
+				
+				$('<ul>')
+					.append($('<li>').text(reservation.no))
+					.append($('<li>').text(reservation.name))
+					.appendTo('#result');
+			},
+			error: (jqXHR) => {
+				if(jqXHR.status == 500) {
+					alert('저장할 수 없는 데이터입니다.');
+				}
+				$('#result').empty();
+				$('#result').text(jqXHR.responseText);
+			}
+		})
 	} // fnAjax3
 	
 </script>
@@ -90,5 +118,18 @@
 	<hr>
 	
 	<div id="result"></div>
+	
+	<hr>
+	
+	<!-- 
+		<img> 태그는 절대 경로의 이미지를 표시하지 못한다. 
+	 	절대 경로의 이미지는 ajax 통신으로 이미지를 읽어 들인다.
+	 	
+	 	jQuery.ajax는 사용하지 않는다.
+	 	D:/Pikachu.jpg 이미지를 읽어 올 것이다.
+	-->
+	<img alt="피카츄" src="${contextPath}/reservation/image">
+	
+	
 </body>
 </html>

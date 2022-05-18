@@ -1,0 +1,57 @@
+07_DBCP
+학습순서
+
+1. pom.xml
+
+   1) 버전 최신화 하기
+   
+   2) ojdbc6 라이브러리 다운로드
+      (1) 별도의 repository 등록
+      (2) dependency 추가
+      
+   3) lombok dependency 추가
+              
+   4) JUnit 단위 테스트를 위해서 아래 dependency 추가
+      (1) spring-test dependency
+      (2) spring-jdbc dependency
+      (3) tomcat-dbcp dependency
+        
+
+2. web.xml 에 인코딩 필터 태그 넣기
+  	<!-- Encoding -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+3. webapp/resources/sql 디렉터리 생성하고,
+   board.sql 작성 (실행할 수 있는 기능이 STS3에 설치되어 있지 않기 때문에 SQL DEVELOPER로 실행)
+
+
+4. webapp/META-INF 디렉터리 생성하고,
+   context.xml 작성
+   -> tomcat 서버가 가지고 있는 context.xml에 작성할 수도 있음.
+
+
+5. BoardConfig.java를 이용해서 bean 작성
+
+
+6. JUnit 단위 테스트
+   1) JNDI를 이용해서 DBCP을 처리하는 경우에는 DB 접속 정보가 Tomcat이 처리하는 context.xml에 등록된다.
+   2) JUnit 단위 테스트는 Tomcat 없이 동작하기 때문에 DB 접속에 문제가 발생한다.
+   3) Tomcat 없이 동작하는 SpringJUnit4ClassRunner 대신에 DB 접속 정보를 넣어주는
+      MySpringJUnit4ClassRunner 클래스를 만들어서 사용한다.
+ 

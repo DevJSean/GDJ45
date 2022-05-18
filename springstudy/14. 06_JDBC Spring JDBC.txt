@@ -1,0 +1,49 @@
+학습순서
+
+1. pom.xml
+
+   1) 버전 최신화 하기
+   
+   2) ojdbc6 라이브러리 다운로드
+      (1) 별도의 repository 등록
+      (2) dependency 추가
+      
+   3) lombok dependency 추가
+     
+   4) JUnit 단위 테스트를 위해서 아래 dependency 추가
+      (1) spring-test dependency
+        
+
+2. web.xml 에 인코딩 필터 태그 넣기
+  	<!-- Encoding -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+3. webapp/resources/sql 디렉터리 생성하고,
+   board.sql 작성 (실행할 수 있는 기능이 STS3에 설치되어 있지 않기 때문에 SQL DEVELOPER로 실행)
+
+
+4. BoardConfig.java를 이용해서 bean 작성
+
+
+5. JUnit 단위 테스트
+   1) @RunWith 애너테이션 : SpringJUnit4ClassRunner.class 등록
+      JUnit4를 이용해서 테스트 한다.
+   2) @ContextConfiguration(classes={BoardConfig.class})
+      BoardConfig.java에 있는 bean을 이용해서 테스트 한다.
+ 

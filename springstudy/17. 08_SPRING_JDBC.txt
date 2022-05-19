@@ -1,0 +1,28 @@
+1. pom.xml (maven-update project)
+
+2. web.xml에 encoding filter 추가
+
+3. 패키지 config, controller, domain, repository, service 생성
+
+4. webapp/resources에 sql폴더 및 sql파일 생성
+
+5. domain      BookDTO(vo) 
+
+6. config      DBConfig.java ()                                        (bean 컨테이너, DataSource를 재료로 JdbcTemplate bean 만들기)
+
+7. service     BookService.interface, BookServiceImpl.java
+
+8. repository  BookRepository(DAO).java                                (@Autowired JdbcTemplate bean 불러오기 )
+
+9. config      BookConfig.java                                         (bean 컨테이너)
+
+10. service    BookServiceImpl.java 완성
+
+11. views      index.jsp, book 폴더 및 list.jsp, save.jsp, detail.jsp
+               resources폴더에 js폴더 및 jquery-3.6.0.js
+
+12. controller BookController.java                                      (@Autowired BookService)
+
+13. repository BookRepository 완성                                      (쿼리 작성, JdbcTemplate 사용) 
+                                                                        (BeanPropertyRowMapper가 db의 칼럼 이름과 DTO의 필드 이름을 비교해서 자동으로 넣어줌)
+                                                                        (PreparedStatementCreator, PreparedStatementSetter 인터페이스 익명 객체 생성 방법)

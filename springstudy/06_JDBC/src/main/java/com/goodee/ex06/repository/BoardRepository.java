@@ -125,7 +125,7 @@ public class BoardRepository {
 		int res = 0;
 		try {
 			con = getConnection();
-			sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ? WHERE BOARD_NO = ?";
+			sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ?, LASTMODIFIED = SYSDATE WHERE BOARD_NO = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, board.getTitle());
 			ps.setString(2, board.getContent());

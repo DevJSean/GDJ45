@@ -1,0 +1,27 @@
+1. pom.xml (maven-update project)
+
+2. web.xml에 encoding filter 추가
+
+3. 패키지 config, controller, domain, repository, service 생성
+
+4. webapp/resources에 sql폴더 및 sql파일 생성
+
+5. domain    
+
+6. config     
+
+7. service    
+
+8. repository 
+ 
+9. config     
+
+10. service   
+
+11. views     
+
+12. controller 
+
+13. repository                            
+                                                                  
+

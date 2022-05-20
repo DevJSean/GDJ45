@@ -82,6 +82,14 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver --> <!-- 위치 중요 -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version> <!-- el처리 -->
+		    <scope>runtime</scope>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

@@ -124,4 +124,16 @@ public class BookController {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	// 트랜잭션 테스트용
+	@GetMapping("/book/transaction/test")
+	public String transaction() {
+		bookService.transaction(); // 테스트 용 서비스 호출
+		return "redirect:/book/list"; // 트랜잭션 테스트 후 목록으로 넘어가기
+	}
+	
+	
+	
 }

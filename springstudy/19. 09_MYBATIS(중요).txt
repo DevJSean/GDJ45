@@ -1,0 +1,105 @@
+MyBatis와 AOP를 이용한 트랜잭션
+
+1. pom.xml
+
+   1) 버전 최신화 하기
+   2) ojdbc6를 다운로드 받던 repository에 오류가 발생하고, ojdbc6.jar를 프로젝트의 build path에 등록하고 사용하는 방법도 오류가 난다.
+      임시방편으로 tomcat 폴더의 lib 폴더에 ojdbc6.jar를 복사해 두는 방법을 사용( 이 방법은 프로젝트 배포할 때 다시 해결해야 한다. )
+   3) lombok dependency 추가
+   4) spring test dependency 추가 (JUnit)
+   5) spring jdbc dependency 추가 (Spring JDBC)
+   6) aspectJ weaver dependency 추가 (AOP)    
+   7) mybatis dependency 추가 (mybatis)
+   8) mybatis spring dependency 추가 (mybatis)
+   9) hikaricp dependency 추가 (HikariCP : 속도 빠른 커넥션 풀) 
+
+2. web.xml 에 인코딩 필터 태그 넣기
+  	<!-- Encoding -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+3. webapp/resources/sql 디렉터리 생성
+   notice.sql 작성 및 DB에 테이블 생성
+
+	Spring에서 DB 관련 view를 보려면..
+	(SQL 파일을 추가할 수 있는 방법)
+	help - install new software...
+	http://download.eclipse.org/releases/2021-03
+	Database Development
+
+4. 패키지 생성 config, controller, domain, repository, service
+
+5. domain  NoticeDTO 생성
+
+6. src/main/resources 패키지에 mybatis 관련 xml들을 배치하기
+	1) mybatis-config.xml
+	2) mapper.xml
+	3) db.properties
+
+7. mybatis-config.xml
+   	1) mapUnderscoreToCamelCase 옵션 작성
+   	2) typeAlias                옵션 작성
+
+8. mapper.xml을 db이름인 notice.xml로 바꾸고 namespace 작성
+
+9. service
+	1) NoticeService.interface 작성
+	2) NoticeServiceImpl.java 생성  	
+		@Autowired
+		private NoticeRepository noticeRepository;       DI 의존성 주입
+	
+10. config
+	1) DBConfig.java 작성        DB와 관련된 bean(HikariConfig, HikariDataSource, SqlSessionFactory, SqlSessionTemplate, TransactionManager) 생성
+
+11. repository
+	1) NoticeRepository.java
+		@Autowired
+		private SqlSessionTemplate sqlSessionTemplate;  DI 의존성 주입
+
+12. config
+	1) TransactionConfig.java 생성
+		변경된 classPath 수정
+
+13. config
+	1) NoticeConfig.java
+		NoticeService, NoticeRepository bean 작성
+
+14. /views/notice/list.jsp 작성
+
+15. controller
+	1) NoticeController.java
+	   return index 작업
+
+
+
+ view		controller		service			DAO, repository		mapper
+list.jsp  - NoticeController.java - NoticeServiceImpl.java - NoticeRepository.java - notice.xml
+
+
+
+14. SqlSession을 통한 메소드 호출
+	1) selectList()
+	2) selectOne()
+	3) insert()
+	4) update()
+	5) delete()
+
+
+
+
+
+

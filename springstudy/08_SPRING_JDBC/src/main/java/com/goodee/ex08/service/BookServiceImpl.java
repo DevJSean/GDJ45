@@ -38,5 +38,16 @@ public class BookServiceImpl implements BookService {
 	public int remove(Long book_no) {
 		return bookRepository.deleteBook(book_no);
 	}
+	
+	@Override
+	public void transaction() {
+		// 성공하는 데이터
+		bookRepository.insertBook(new BookDTO(null, "테스트", "테스트", 1, "테스트", null));
+		// 실패하는 데이터
+		bookRepository.insertBook(new BookDTO(null, null, null, null, null, null)); // title과 author가 not null이다.
+		
+		// 트랜잭션이 동작한다면, 둘 다 삽입되지 않아야 한다.
+		// All or Nothing (원자성) : 모두 수행되거나, 하나도 수행되지 않는다.
+	}
 
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- mybatis.mapper 패키지에 저장된 notice.xml입니다. -->
+<mapper namespace="mybatis.mapper.notice">
+
+	<!-- 목록 -->
+	<select id="selectNoticeList" resultType="NoticeDTO">  <!-- com.goodee.ex09.domain.NoticeDTO를 NoticeDTO로 줄여 부르기로 mybatis-config.xml에서 처리함 -->
+		SELECT NOTICE_NO, TITLE, CONTENT, CREATED, LASTMODIFIED
+		  FROM NOTICE
+		 ORDER BY NOTICE_NO DESC
+	</select>
+	
+
+</mapper>

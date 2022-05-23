@@ -19,4 +19,28 @@ public class NoticeRepository {
 		return sqlSessionTemplate.selectList("mybatis.mapper.notice.selectNoticeList"); // mapper의 namespace.id
 	}
 	
+	public int insertNotice(NoticeDTO notice) {
+		return sqlSessionTemplate.insert("mybatis.mapper.notice.insertNotice", notice);
+	}
+	
+	public NoticeDTO selectNoticeByNo(Long noticeNo) {
+		return sqlSessionTemplate.selectOne("mybatis.mapper.notice.selectNoticeByNo", noticeNo);
+	}
+	
+	public int updateHit(Long noticeNo) {
+		return sqlSessionTemplate.update("mybatis.mapper.notice.updateHit", noticeNo);
+	}
+	
+	public int updateNotice(NoticeDTO notice) {
+		return sqlSessionTemplate.update("mybatis.mapper.notice.updateNotice", notice);
+	}
+	
+	public int deleteNotice(Long noticeNo) {
+		return sqlSessionTemplate.delete("mybatis.mapper.notice.deleteNotice", noticeNo);
+	}
+	
+	public int deleteNoticeList(List<Long> list) {
+		return sqlSessionTemplate.delete("mybatis.mapper.notice.deleteNoticeList", list);
+	}
+	
 }

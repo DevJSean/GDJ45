@@ -43,7 +43,7 @@ public class TransactionConfig {
 	public Advisor advisor() {
 		
 		AspectJExpressionPointcut pointCut = new AspectJExpressionPointcut();
-		pointCut.setExpression("execution(* com.goodee.ex09.service.*Impl.*(..))"); // 잘라 들어가는 시점
+		pointCut.setExpression("execution(* com.goodee.ex09.service.*Impl.*(..))"); // 잘라 들어가는 시점, NoticeServiceImpl의 모든 메소드에서 transaction 처리가 됨.
 		
 		return new DefaultPointcutAdvisor(pointCut, interceptor()); // interceptor() 메소드 호출
 	}

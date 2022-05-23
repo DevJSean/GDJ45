@@ -1,0 +1,6 @@
+
+	Spring에서 DB 관련 view를 보려면..
+	(SQL 파일을 추가할 수 있는 방법)
+	help - install new software...
+	http://download.eclipse.org/releases/2021-03
+	Database Development

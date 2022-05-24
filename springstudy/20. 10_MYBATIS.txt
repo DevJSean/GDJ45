@@ -1,0 +1,143 @@
+MyBatis와 AOP를 이용한 트랜잭션
+
+1. pom.xml
+
+   1) 버전 최신화 하기
+   2) ojdbc6를 다운로드 받던 repository에 오류가 발생하고, ojdbc6.jar를 프로젝트의 build path에 등록하고 사용하는 방법도 오류가 난다.
+      임시방편으로 tomcat 폴더의 lib 폴더에 ojdbc6.jar를 복사해 두는 방법을 사용( 이 방법은 프로젝트 배포할 때 다시 해결해야 한다. )
+   3) lombok dependency 추가
+   4) spring test dependency 추가 (JUnit)
+   5) spring jdbc dependency 추가 (Spring JDBC)
+   6) aspectJ weaver dependency 추가 (AOP)    
+   7) mybatis dependency 추가 (mybatis)
+   8) mybatis spring dependency 추가 (mybatis)
+   9) hikaricp dependency 추가 (HikariCP : 속도 빠른 커넥션 풀) 
+
+2. web.xml 에 인코딩 필터 태그 넣기
+  	<!-- Encoding -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+3. webapp/resources/sql 디렉터리 생성
+   notice.sql 작성 및 DB에 테이블 생성
+
+4. 패키지 생성 config, controller, domain, mapper, service
+
+5. domain  NoticeDTO 생성
+
+6. src/main/resources 패키지에 mybatis 관련 xml들을 배치하기
+	1) mybatis-config.xml
+	2) mapper.xml
+	3) db.properties
+
+7. mybatis-config.xml
+   	1) mapUnderscoreToCamelCase 옵션 작성
+   	2) typeAlias                옵션 작성
+
+11. mapper
+	1) NoticeMapper.java(인터페이스)
+		@Mapper
+
+8. notice.xml
+	1) mapper.xml을 db이름인 notice.xml로 변경
+	2) namespace 작성
+	        <mapper namespace="com.goodee.ex10.mapper.NoticeMapper">
+
+9. service
+	1) NoticeService.interface 작성
+	2) NoticeServiceImpl.java 생성  	
+		@Autowired
+		private NoticeMapper noticeMapper;
+	
+10. config
+	1) DBConfig.java 작성 
+		@MapperScan
+		@PropertySource
+		@EnableTransactionManagement
+		@Configuration       
+		DB와 관련된 bean(HikariConfig, HikariDataSource, SqlSessionFactory, SqlSessionTemplate, TransactionManager) 생성
+
+12. config
+	1) TransactionConfig.java 생성
+		변경된 classPath 수정
+
+13. config
+	1) NoticeConfig.java
+		NoticeService bean 작성
+
+14. views
+	1) /views/index.jsp
+	2) /views/notice/list.jsp 작성
+
+15. controller
+	NoticeController.java
+	1) @Autowired
+	   private NoticeService noticeService;
+	2) @GetMapping("/")
+	   public String index() {
+		return "index";  }
+
+-------------------------------------------------------------------------------------------------
+1. 추가
+2. 상세보기(detail.jsp)
+   조회수 처리
+3. 수정 화면(change.jsp)
+   수정 화면으로 이동할 때
+   상세보기를 호출하고 해당 정보를 가지고 이동
+   또 상세보기를 한 것으로 인식해서
+   조회수가 증가하는 문제 해결
+4. 삭제
+   목록에서 삭제
+   상세보기에서 삭제
+
+
+ view		controller		service		     DAO, repository,mapper	mapper
+list.jsp  - NoticeController.java - NoticeServiceImpl.java - NoticeMapper.java - notice.xml
+
+--------------------------------------------------------------------------------------------------------
+mappaer에서
+${noticeNo}  : 10
+#{title}     : '공지'  
+#은 ''가 붙는다. 오라클 DB는 ''로 보내도 숫자형은 자동으로 TO_NUMBER가 돌아서 모든 값을 다 #로 보냈었다.
+$는 사용해야 하는 특수한 상황이 있다.
+--------------------------------------------------------------------------------------------------------
+
+기존의 NoticeRepository.java(클래스)를 NoticeMapper.java(인터페이스)로 교체한다.
+NoticeConfig.java에 등록된 NoticeRepository bean도 없어진다.
+NoticeMapper.java는 인터페이스이기 때문에 bean으로 등록할 수 없다.
+
+NoticeMapper.java는 notice.xml 매퍼의 쿼리문을 호출하는 수단이다.
+NoticeMapper.java notice.xml 매퍼가 가지고 있는 쿼리문의 id를 추상메소드로 가진다.
+NoticeMapper.java의 메소드를 호출하면 notice.xml에 연결된 쿼리문이 호출딘다.
+
+NoticeServiceImpl.java에서 사용하던 NoticeRepository를 NoticeMapper로 교체한다.
+
+DBConfig.java에 @MapperScan을 추가 등록한다.
+
+--------------------------------------------------------------------------------------------------------
+
+트랜잭션 동작 테스트
+
+매핑 ${contextPath}/notice/transaction/test
+
+서비스에서 아래 메소드 동시 호출
+insertNotice(new NoticeDTO(null, "테스트", "테스트", null, null, null));
+insertNotice(new NoticeDTO());
+
+최종적으로 
+http://localhost:9090/ex10/notice/transaction/test
+후에 아무 것도 insert되면 안 된다.

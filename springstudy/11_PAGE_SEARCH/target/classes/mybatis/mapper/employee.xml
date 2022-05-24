@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!--
+	중요
+	mapper namespace가 달라진다.
+	notice.xml의 쿼리문을 호출할 NoticeMapper.java를 namespace로 작성한다.
+-->
+<mapper namespace="com.goodee.ex11.mapper.EmployeeMapper">
+
+	<!-- 전체 레코드 개수 -->
+	<select id="selectEmployeeCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM EMPLOYEES
+	</select>
+
+	<!-- BEGIN-END 사이 목록 반환 -->
+	<select id="selectEmployees" parameterType="Map" resultType="Employee"> <!-- 반환타입이 List<Employee>이지만 Employee라고 적는다. -->
+		SELECT A.RNK, A.EMPLOYEE_ID, A.FIRST_NAME, A.LAST_NAME, A.EMAIL, A.PHONE_NUMBER, A.HIRE_DATE, A.JOB_ID, A.SALARY, A.COMMISSION_PCT, A.MANAGER_ID, A.DEPARTMENT_ID
+  			FROM (SELECT RANK() OVER(ORDER BY HIRE_DATE DESC) AS RNK, EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID
+                    FROM EMPLOYEES) A
+ 		   WHERE A.RNK BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	<!-- 
+		RANK() / ROW_NUMBER() / ROWNUM 칼럼    dbstudy - 7일차3_인라인뷰
+	
+		나중에 입사한 사원을 리스트의 시작에 배치하기
+		SELECT RANK() OVER(ORDER BY HIRE_DATE DESC) AS 순위, EMPLOYEE_ID, FIRST_NAME, HIRE_DATE
+		  FROM EMPLOYEES;
+		  
+		BEGIN ~ END 사이의 사원만 가져오기
+		SELECT A.순위, A.EMPLOYEE_ID, A.FIRST_NAME, A.HIRE_DATE
+		  FROM (SELECT RANK() OVER(ORDER BY HIRE_DATE DESC) AS 순위, EMPLOYEE_ID, FIRST_NAME, HIRE_DATE
+		          FROM EMPLOYEES) A
+		 WHERE A.순위 BETWEEN 6 AND 10; 
+	 -->
+ 
+</mapper>

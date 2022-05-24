@@ -39,8 +39,15 @@
 		    <artifactId>HikariCP</artifactId>
 		    <version>3.4.5</version>
 		</dependency>
-				
-	
+			
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version> <!-- el처리 -->
+		    <scope>runtime</scope>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
@@ -57,7 +64,7 @@
 		    <scope>test</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc --><!-- MYBATIS쓸 때 mybatis, mybatis-spring, spring-jdbc 다 있어야 한다. -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
@@ -89,14 +96,6 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
-		
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver --> <!-- 위치 중요 -->
-		<dependency>
-		    <groupId>org.aspectj</groupId>
-		    <artifactId>aspectjweaver</artifactId>
-		    <version>${org.aspectj-version}</version> <!-- el처리 -->
-		    <scope>runtime</scope>
-		</dependency>
 		
 		<!-- Logging -->
 		<dependency>

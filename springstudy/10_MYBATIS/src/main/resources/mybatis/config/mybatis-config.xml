@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<configuration>
+
+	<!-- mapUnderscoreToCamelCase : NOTICE_NO칼럼을 noticeNo 필드로 인식시켜 준다.  -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- typeAlias : com.goodee.ex10.domain.NoticeDTO == NoticeDTO로 인식시키는 옵션 -->
+	<typeAliases>
+		<typeAlias type="com.goodee.ex10.domain.NoticeDTO" alias="NoticeDTO" />
+	</typeAliases>
+	
+	
+	
+</configuration>

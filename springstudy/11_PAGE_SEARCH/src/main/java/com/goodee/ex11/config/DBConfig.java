@@ -33,7 +33,7 @@ public class DBConfig {
 	// import 주의
 	@Value(value="${hikariConfig.driverClassName}") private String driverClassName; // "oracle.jdbc.OracleDriver"
 	@Value(value="${hikariConfig.jdbcUrl}") private String jdbcUrl; // "jdbc:oracle:thin:@localhost:1521:xe"
-	@Value(value="${hikariConfig.username}") private String username; // "SCOTT"
+	@Value(value="${hikariConfig.username}") private String username; // "HR"
 	@Value(value="${hikariConfig.password}") private String password; // "1111"
 	
 	// HikariCP 환경 설정

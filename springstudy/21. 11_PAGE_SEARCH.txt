@@ -1,0 +1,46 @@
+hr 계정 살리기
+
+hr 계정 접속
+---------------------------------------------------------
+pom.xml
+
+web.xml 인코딩
+
+
+
+
+---------------------------------------------------------
+
+ 1 2 3 4 5
+
+page=1
+path="/employee/list"
+
+1
+<a href="${contextPath}" + path + "?page2">2</a>
+<a href="${contextPath}/employee/list?page3">3</a>
+<a href="${contextPath}/employee/list?page4">4</a>
+<a href="${contextPath}/employee/list?page5">5</a>
+
+
+-----------------------------------------------------------
+
+
+page = 1 ~ 5   , beginPage = 1                                   , endPage = 5
+                 (pagePerBlock * (page - 1) / pagePerBlock) + 1
+
+page = 6 ~ 10  , beginPage = 6                                   , endPage = 10
+                 (pagePerBlock * (page - 1) / pagePerBlock) + 1
+
+page = 11 ~ 15 , beginPage = 11                                  , endPage = 12        
+                 (pagePerBlock * (page - 1) / pagePerBlock) + 1
+
+      
+
+
+
+
+
+
+
+

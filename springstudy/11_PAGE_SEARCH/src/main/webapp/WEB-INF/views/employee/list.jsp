@@ -9,6 +9,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	body, input, textarea, select, button, table {
+    font-size: 16px;
+    font-family: Arial,'나눔고딕',NanumGothic,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','맑은고딕',MalgunGothic,'돋움',Dotum,Sans-serif;
+    color: #434343;
+	}
+
+	tfoot{
+		text-align: center;
+
+	}
+	
+</style>
+
 </head>
 <body>
 
@@ -26,15 +41,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${employees}" var="emp">
+			<c:forEach items="${employees}" var="emp" varStatus='vs'> <!-- varStatus는 인덱스를 사용하기 위해서 사용 -->
 				<tr>
-					<td>순번</td>
+					<td>${beginNo - vs.index}</td>
 					<td>${emp.employeeId}</td>
 					<td>${emp.firstName}</td>
 					<td>${emp.hireDate}</td>
 					<td>${emp.salary}</td>
 					<td>${emp.departmentId}</td>
-					<td>부서이름</td>
+					<td>${emp.departmentName}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

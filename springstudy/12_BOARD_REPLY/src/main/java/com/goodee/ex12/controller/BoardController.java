@@ -43,6 +43,7 @@ public class BoardController {
 	//	return "redirect:/board/list"; // 메세지 없이 여기서 이동 redirect
 	//}
 	public String save(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("type", "insert");
 		redirectAttributes.addFlashAttribute("insRes", boardService.save(request));
 		return "redirect:/board/result";  // 매핑 /board/result로 redirect한다.
 	}                  // ↓                
@@ -76,6 +77,7 @@ public class BoardController {
 	}*/
 	@PostMapping("/board/change")
 	public String change(BoardDTO board, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("type", "update");
 		redirectAttributes.addFlashAttribute("updRes", boardService.change(board));
 		return "redirect:/board/result";
 	}
@@ -83,6 +85,7 @@ public class BoardController {
 	@GetMapping("/board/remove")
 	public String remove(@RequestParam(value="boardNo", required=false, defaultValue="0") Long boardNo
 						, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("type", "delete");
 		redirectAttributes.addFlashAttribute("delRes", boardService.remove(boardNo));
 		return "redirect:/board/result";
 	}

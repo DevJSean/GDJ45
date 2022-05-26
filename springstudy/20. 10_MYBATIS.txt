@@ -105,7 +105,7 @@ MyBatis와 AOP를 이용한 트랜잭션
    상세보기에서 삭제
 
 
- view		controller		service		     DAO, repository,mapper	mapper
+ view		controller		service		     DAO, repository(mapper패키지)	mapper
 list.jsp  - NoticeController.java - NoticeServiceImpl.java - NoticeMapper.java - notice.xml
 
 --------------------------------------------------------------------------------------------------------

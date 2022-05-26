@@ -1,11 +1,7 @@
-hr 계정 살리기
 -- 교육용 HR계정의 lock을 풀고 새로 비밀번호를 부여한다
+ALTER USER HR ACCOUNT UNLOCK;
+ALTER USER HR IDENTIFIED BY 1111;
 
-ALTER USER hr ACCOUNT UNLOCK;
-
-ALTER USER hr IDENTIFIED BY 1111;
-
-hr 계정 접속
 새로 만들기/데이터베이스 접속 선택
 Name HR
 사용자 이름 HR
@@ -48,10 +44,71 @@ Name HR
 	</filter-mapping>
 
 ---------------------------------------------------------
-3. 패키지 생성 config, controller, domain, mapper, service, util
+3. 패키지 생성 
+	config, controller, domain, mapper, service, util
 
 ---------------------------------------------------------
-4. 
+4. domain
+	Employee.java
+	Department.java 
+
+---------------------------------------------------------
+5. config
+	DBConfig.java
+---------------------------------------------------------
+6. src/main/resources
+	1) config       typeAlias 수정
+	2) mapper 	employee.xml 
+			<mapper namespace="com.goodee.ex11.mapper.EmployeeMapper">
+	3) properties	db.properties
+			username을 HR로 변경
+
+---------------------------------------------------------
+7. controller
+	EmployeeController
+		@Controller
+
+		@Autowired
+		private EmployeeService employeeService;
+---------------------------------------------------------
+8. /views/index.jsp
+   /views/employee/search.jsp
+   /views/employee/list.jsp
+
+---------------------------------------------------------
+9. util
+	PageUtils.java
+
+---------------------------------------------------------
+10. mapper
+	EmployeeMapper.java 인터페이스  완성
+		@mapper
+---------------------------------------------------------
+
+11. service
+	EmployeeService.java 인터페이스
+	EmployeeServiceImpl.java 
+		@Service
+		@Autowired
+		private EmployeeMapper employeeMapper;
+---------------------------------------------------------
+
+12. config
+	ServiceConfig.java
+		@Configuration
+		@Bean
+		public EmployeeService employeeService() {
+			return new EmployeeServiceImpl();
+		}
+
+---------------------------------------------------------------------------------------
+
+
+search.jsp - EmployeeController - EMployeeServiceImpl - EmployeeMapper - employee.xml
+
+
+
+---------------------------------------------------------
  1 2 3 4 5
 
 page=1

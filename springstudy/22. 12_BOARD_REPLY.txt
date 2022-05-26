@@ -1,0 +1,132 @@
+1. pom.xml
+
+   1) 버전 최신화 하기
+   2) ojdbc6를 다운로드 받던 repository에 오류가 발생하고, ojdbc6.jar를 프로젝트의 build path에 등록하고 사용하는 방법도 오류가 난다.
+      임시방편으로 tomcat 폴더의 lib 폴더에 ojdbc6.jar를 복사해 두는 방법을 사용( 이 방법은 프로젝트 배포할 때 다시 해결해야 한다. )
+   3) jackson-databind dependency    (jackson-databind)
+   4) json dependency                (json)
+   5) mybatis dependency             (mybatis) 
+   6) mybatis-spring dependency      (mybatis-spring)
+   7) hikaricp dependency 추가       (HikariCP : 속도 빠른 커넥션 풀) 
+   8) lombok dependency 추가         (lombok)
+   9) spring-test dependency 추가    (spring-test)
+   10) spring-jdbc dependency 추가   (spring-jdbc)
+   11) javax.servlet-api dependency  (javax.servlet-api) 
+   12) junit dependency 추가         (junit) 
+---------------------------------------------------------------------------------------------------------
+2. web.xml 에 인코딩 필터 태그 넣기
+  	<!-- Encoding -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+---------------------------------------------------------------------------------------------------------
+3. webapp/resources/sql 디렉터리 생성
+   board_reply.sql 작성 및 DB에 테이블 생성
+
+   webapp/resources/js 디렉터리 생성
+   jquery-3.6.0 제이쿼리 자르 파일
+
+---------------------------------------------------------------------------------------------------------
+4. views
+	index.jsp
+		contextPath 작업
+		로그인 폼 생성
+	
+	board 폴더 생성
+---------------------------------------------------------------------------------------------------------
+5. 패키지 생성 
+	config, controller, domain, mapper, service, util
+
+---------------------------------------------------------------------------------------------------------
+6. src/main/resources
+	1) config       typeAlias 수정
+	2) mapper 	board.xml 
+			<mapper namespace="com.goodee.ex12.mapper.BoardMapper">
+			reply.xml
+			<mapper namespace="com.goodee.ex12.mapper.ReplyMapper">
+	3) properties	db.properties
+			username을 SCOTT으로 변경
+---------------------------------------------------------------------------------------------------------
+7. util
+	PageUtils.java
+		11장의 것을 그대로 가져옴
+		getter/setter를 lombok으로 대체
+---------------------------------------------------------------------------------------------------------
+8. domain
+	ReplyDTO.java
+	BoardDTO.java 
+---------------------------------------------------------------------------------------------------------
+9. config
+	DBConfig.java
+
+		@MapperScan(basePackages = {"com.goodee.ex12.mapper"}) 수정
+---------------------------------------------------------------------------------------------------------
+10. controller
+	BoardController.java  @Controller
+		@Autowired
+		private BoardService boardService;
+
+	ReplyController.java  @Controller
+		@Autowired
+		private ReplyService ReplyService;
+
+	UserController.java   @Controller
+		index작업
+		간단한 login 작업
+---------------------------------------------------------------------------------------------------------
+11. mapper
+	BoardMapper.java 인터페이스 @Mapper
+	ReplyMapper.java 인터페이스 @Mapper
+---------------------------------------------------------------------------------------------------------
+12. service
+	BoardService.java 인터페이스
+	BoardServiceImpl.java       @Service
+		@Autowired
+		private BoardMapper boardMapper;
+
+	ReplyService.java 인터페이스
+	ReplyServiceImpl.java       @Service
+		@Autowired
+		private ReplyMapper replyMapper;
+---------------------------------------------------------------------------------------------------------
+13. config
+	ServiceConfig.java    @Configuration
+		@Bean BoardService 만들기
+		@Bean ReplyService 만들기
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+view			controller
+index.jsp	-	UserController.java			
+
+view			controller			service				DAO, repository(mapper패키지)		mapper
+list.jsp	-	BoardController.java	-	BoardServiceImpl.java	-	BoardMapper.java		-	board.xml
+detail.jsp
+change.jsp
+save.jsp
+   
+view			controller			service				DAO, repository(mapper패키지)		mapper
+		-	ReplyController.java	-	ReplyServiceImpl.java	-	ReplyMapper.java		-	reply.xml
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,16 @@
+GET : select, delete
+POST : insert, update, 이미지 파일
+
+-----------------------------------------------------------------------------------------------------------
+
 Redirect : DML(insert, update, delete) 시스템(session, DB)에 변화가 생기는 요청(로그인, 회원가입, 글쓰기)
            mapping으로 이동
 Forward : SQL(select) 시스템에 변화가 생기지 않는 단순조회(리스트보기, 검색)
           jsp로 이동.
 
-GET : select, delete
-POST : insert, update, 이미지 파일
+-----------------------------------------------------------------------------------------------------------
+Redirect or Forward을 한다.
+request  or model이 있다. -> MVC pattern
+
+값을 반환한다.
+request and model이 없다. -> AJAX

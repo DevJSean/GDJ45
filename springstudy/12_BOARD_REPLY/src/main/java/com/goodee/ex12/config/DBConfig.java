@@ -6,15 +6,22 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+
+// @Component를 com.goodee.ex12.batch에서 찾아라
+@ComponentScan(basePackages = {"com.goodee.ex12.batch"})
+// scheduling 허용한다.
+@EnableScheduling
 
 // @Mapper를 사용하고 있는데, 여기에서 Mapper를 찾아라.
 @MapperScan(basePackages = {"com.goodee.ex12.mapper"})

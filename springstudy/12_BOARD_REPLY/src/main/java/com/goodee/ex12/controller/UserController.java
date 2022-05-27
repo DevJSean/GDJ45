@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.goodee.ex12.util.SecurityUtils;
+
 @Controller
 public class UserController {
 	
@@ -24,7 +26,7 @@ public class UserController {
 		// 아이디, 비밀번호, 이름을 Map으로 만들어서 session에 보관
 		// HttpSession session = request.getSession(); 매개변수가 아니고 request를 통해서 여기서 선언해도 됨.
 		Map<String, String> user = new HashMap<>();
-		user.put("id", request.getParameter("id"));
+		user.put("id", SecurityUtils.XSS(request.getParameter("id"))); // 사용자의 입력 파라미터로 받아올 때 xss처리
 		user.put("pw", request.getParameter("pw"));
 		user.put("name", "로그인 성공한 사람");
 		session.setAttribute("user", user); // session은 페이지가 바껴도 사용 가능(목록보기, 상세보기, 삽입,수정,삭제 페이지)

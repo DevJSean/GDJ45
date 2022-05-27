@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.goodee.ex12.domain.BoardDTO;
 import com.goodee.ex12.domain.ReplyDTO;
 import com.goodee.ex12.mapper.BoardMapper;
 import com.goodee.ex12.util.PageUtils;
+
 
 @Service
 public class BoardServiceImpl implements BoardService {

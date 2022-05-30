@@ -42,8 +42,6 @@
 	td:nth-of-type(3) { width: 240px; }
 	td:nth-of-type(4) { width: 240px; }
 	td:nth-of-type(5) { width: 120px; }
-	td:nth-of-type(6) { width: 160px; }
-	td:nth-of-type(7) { width: 160px; }
 	td {
 		padding: 5px;
 		border-top: 1px solid silver;

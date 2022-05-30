@@ -32,10 +32,117 @@
 			location.href="${contextPath}/board/list";
 		})
 		
-	})
+		// 댓글 개수 + 리스트
+		fnReplies();
+		
+		// 댓글 달기
+		fnReplySave();
+		
+		// 댓글 삭제
+		fnReplyRemove();
+		
+		// 댓글창 초기화
+		fnInit();
+		
+	}) // 페이지 로드 이벤트
 	
+	// 함수
+	function fnReplies(){
+		// 댓글 개수 + 리스트
+		$.ajax({
+			/* 요청 */
+			url: '${contextPath}/reply/list', 
+			type: 'get',
+			data: 'boardNo=${board.boardNo}',
+			
+			/* 응답 */
+			dataType: 'json',
+			success: function(obj){ // obj = {"replyCount" : 개수, "replies" : [{댓글정보}, {댓글정보}, ...]}
+				$('#replies').empty(); // 초기화
+			
+				$('#replyCount').text(obj.replyCount); // 개수 달아주기
+				
+				$.each(obj.replies, function(i, reply){ // 리스트 넣기
+					var tr = $('<tr>')
+					.append($('<td>').text(reply.writer))
+					.append($('<td>').text(reply.content))
+					.append($('<td>').text(reply.ip))
+					.append($('<td>').text(reply.created))
+					if(reply.writer == '${user.id}'){  // 댓글 작성자와 로그인한 사람이 같으면
+						$(tr).append($('<td>').html('<span class="removeLink" data-reply_no="' + reply.replyNo + '">x</span>'))
+					}
+					$(tr).appendTo('#replies');
+				})
+			},
+			error: function(jqXHR){
+				
+			}
+		})
+	}
+	
+	function fnReplySave() {
+		$('#btnReplySave').on('click', function(){
+			$.ajax({
+				/* 요청 */
+				url: '${contextPath}/reply/save',
+				type: 'post',
+				data: $('#f').serialize(),
+				
+				/* 응답 */
+				dataType: 'json',
+				success: function(obj) {
+					if(obj.res > 0) {
+						alert('댓글이 등록되었습니다.');
+						fnReplies();
+						fnInit();
+					}
+				},
+				error: function(jqXHR) {
+					
+				}
+			})
+		})
+	}
+	
+	function fnReplyRemove() {
+		//$('.removeLink').on('click', function(){} // 정적 요소 처리 방법
+		$('body').on('click', '.removeLink', function(){ // 동적 요소 처리 방법(정적 요소(부모)를 부르고, 이벤트와 function사이에 동적 요소를 넣는다.)	
+			if(confirm('삭제할까요?')){
+				$.ajax({
+					/* 요청 */
+					url: '${contextPath}/reply/remove',
+					type: 'get',
+					data: 'replyNo=' + $(this).data('reply_no'),
+						
+					/* 응답 */
+					dataType: 'json',
+					success: function(obj){
+						if(obj.res > 0){
+							alert('댓글이 삭제되었습니다.');
+							fnReplies();
+							fnInit();
+						}
+					},
+					error: function(jqXHR){
+						
+					}
+				})
+			}
+		})
+	}
+	
+	function fnInit(){
+		$('#content').val('');
+	}
 
 </script>
+
+<style>
+	.removeLink:hover {
+		cursor: pointer;
+		color: red;
+	}
+</style>
 
 </head>
 <body>
@@ -59,13 +166,24 @@
 	
 	<hr>
 	
-	댓글 몇 개?
+	<div>
+		댓글 <span id="replyCount"></span>개
+	</div>
 	
-	<textarea rows="3" cols="30" name="content" id="content"></textarea><br><br>
+	<form id="f">
+		<input type="hidden" name="writer" value="${user.id}">
+		<input type="hidden" name="boardNo" value="${board.boardNo}">
+		<textarea rows="3" cols="30" name="content" id="content"></textarea>
+		<c:if test="${user != null}">
+			<input type="button" value="작성완료" id="btnReplySave">
+		</c:if>
+	</form>
+	
+	<br><br>
 	
 	댓글 리스트<br>
 	<table>
-		<tbody>
+		<tbody id="replies">
 			
 		</tbody>
 	</table>

@@ -58,11 +58,12 @@ public class BoardJob {				   // @EnableScheduling   // scheduling 허용한다.
 
 	
 	// @Scheduled애너테이션(크론식)
+	/*
 	@Scheduled(cron = "0/10 * * * * ?") // 크론식 문자열로 10초마다
 	public void execute() {
 		System.out.println("---쿼츠 동작 중---");
 		System.out.println(boardMapper.selectBoardCount());            // 적당한 정수 값 반환하는 메소드
 	}
-	
+	*/
 	
 }

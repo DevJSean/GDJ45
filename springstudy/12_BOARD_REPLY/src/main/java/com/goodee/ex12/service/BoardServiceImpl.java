@@ -68,18 +68,10 @@ public class BoardServiceImpl implements BoardService {
 		// 게시글 가져 오기(원글)
 		BoardDTO board = boardMapper.selectBoardByNo(boardNo);
 		
-		// 게시글이 존재하면, 댓글을 가져와야 한다.
+		// 게시글이 존재하면 session에 두기 (상세보기, 수정할 때 꺼내 보려고)
 		if(board != null) {
 			
-			// 게시글을 session에 두기(상세보기, 수정할 때 꺼내 보려고)
 			request.getSession().setAttribute("board", board);
-			
-			// 댓글 목록 가져오기
-			List<ReplyDTO> replies = null;
-			
-			// detail.jsp로 보낼 정보
-			// model.addAttribute("board", board); 위에서 session에 올렸기 때문에 없어도 된다.
-			model.addAttribute("replies", replies);
 			
 		} else {
 			try {

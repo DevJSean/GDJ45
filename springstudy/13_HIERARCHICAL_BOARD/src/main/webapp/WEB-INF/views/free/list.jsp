@@ -18,7 +18,8 @@
 	$(function(){
 		
 		$('.reply_link').on('click', function(){
-			$(this).parent().parent().next().toggleClass('reply_form');
+			$('.reply_form').addClass('blind');
+	    	$(this).parent().parent().next().removeClass('blind');
 		})
 	})
 
@@ -61,7 +62,7 @@
 		border-bottom: 0;
 	}
 	
-	.reply_form {
+	.blind {
 		display: none;
 	}
 </style>
@@ -124,7 +125,7 @@
 							<td>내가 쓴 게시글만 삭제버튼 가능하게</td>
 						</tr>
 						<!-- class 속성값 reply_form을 가지고 있으면 안 보인다. -->
-						<tr class="reply_form">
+						<tr class="reply_form blind">
 							<td colspan="5">
 								<form action="${contextPath}/freeBoard/saveReply" method="post">
 									<input type="text" name="writer" placeholder="작성자" size="4"> <!-- 원래는 작성자 readonly만 되어야 한다. -->

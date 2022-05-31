@@ -15,8 +15,8 @@ public interface FreeBoardMapper {
 	
 	public int insertFreeBoard(FreeBoardDTO freeBoardDTO);
 	
-	public int updatePreviousReply(FreeBoardDTO freeBoardDTO);
-	public int insertReply(FreeBoardDTO freeBoardDTO);
+	public int updatePreviousReply(FreeBoardDTO previousReply);
+	public int insertReply(FreeBoardDTO reply);
 	
 	public int deleteFreeBoard(Long freeBoardNo);
 }

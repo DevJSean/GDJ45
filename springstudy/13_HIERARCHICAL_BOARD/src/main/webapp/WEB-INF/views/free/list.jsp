@@ -21,6 +21,8 @@
 			$('.reply_form').addClass('blind');
 	    	$(this).parent().parent().next().removeClass('blind');
 		})
+		
+		
 	})
 
 </script>
@@ -54,12 +56,12 @@
 		padding: 5px;
 		border-top: 1px solid silver;
 		border-bottom: 1px solid silver;
-		text-align: center;
 	}
 	tfoot td {
 		border-left: 0;
 		border-right: 0;
 		border-bottom: 0;
+		text-align: center;
 	}
 	
 	.blind {
@@ -70,9 +72,18 @@
 </head>
 <body>
 
-	<h3>게시판</h3>
-
-	<a href="${contextPath}/freeBoard/saveFreeBoard">새글작성</a>
+	<h3>게시글 작성 화면</h3>
+	
+	<c:if test="${member ne null}">
+		<form action="${contextPath}/freeBoard/saveFreeBoard" method="post">
+			<input type="text" name="writer" value="${member.id}" readonly>
+			<input type="text" name="content" placeholder="내용">
+			<button>작성 완료</button>
+		</form>
+	</c:if>
+	<c:if test="${member eq null}">
+		게시글을 작성하시려면 로그인을 하세용
+	</c:if>
 
 	<hr>
 	
@@ -97,12 +108,13 @@
 				<c:forEach items="${freeBoards}" var="fb">
 					<c:if test="${fb.state == -1}">
 						<tr>
-							<td colspan="5">삭제된 게시글입니다.</td>
+							<td>${totalRecord - fb.rowNum + 1}</td>
+							<td colspan="4">삭제된 게시글입니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${fb.state == 1}">
 						<tr>
-							<td>${fb.rowNum}</td>
+							<td>${totalRecord - fb.rowNum + 1}</td> <!-- 큰 번호가 위로 오도록 만들기 -->
 							<td>${fb.writer}</td>
 							<td>
 								<!-- Depth만큼 들여쓰기(Depth 1 == Space 2)-->
@@ -117,25 +129,42 @@
 									${fb.content} 
 								</c:if>
 								<!-- 답글 달기 (if 있으면 1단 댓글만 허용, if 없으면 다단 댓글 허용)-->
-								<c:if test="${fb.depth eq 0}">
-									<a class="reply_link">답글</a>
-								</c:if>
+		 						<%-- <c:if test="${fb.depth eq 0}"> --%>
+									<a class="reply_link">[답글]</a>
+								<%-- </c:if> --%>
 							</td>
 							<td>${fb.created}</td>
-							<td>내가 쓴 게시글만 삭제버튼 가능하게</td>
+							<td>
+								<c:if test="${member.id eq fb.writer}">
+									<span onclick="fnRemove()">
+										<i class="fa-solid fa-trash-can"></i>
+									</span>
+									<script>
+										function fnRemove() {
+											if(confirm('삭제할까요?')){
+												location.href='${contextPath}/freeBoard/remove?freeBoardNo=${fb.freeBoardNo}';
+											}
+										}
+									</script>
+								</c:if>
+							</td>
 						</tr>
-						<!-- class 속성값 reply_form을 가지고 있으면 안 보인다. -->
 						<tr class="reply_form blind">
 							<td colspan="5">
-								<form action="${contextPath}/freeBoard/saveReply" method="post">
-									<input type="text" name="writer" placeholder="작성자" size="4"> <!-- 원래는 작성자 readonly만 되어야 한다. -->
-									<input type="text" name="content" placeholder="내용" size="40">
-									<!-- 원글의 Depth, GroupNo, GroupOrd -->
-									<input type="hidden" name="depth" value="${fb.depth}">
-									<input type="hidden" name="groupNo" value="${fb.groupNo}">
-									<input type="hidden" name="groupOrd" value="${fb.groupOrd}">
-									<button>답글달기</button>
-								</form>
+								<c:if test="${member ne null}">
+									<form action="${contextPath}/freeBoard/saveReply" method="post">
+										<input type="text" name="writer" value="${member.id}" size="4" readonly>
+										<input type="text" name="content" placeholder="내용" size="40">
+										<!-- 원글의 Depth, GroupNo, GroupOrd -->
+										<input type="hidden" name="depth" value="${fb.depth}">
+										<input type="hidden" name="groupNo" value="${fb.groupNo}">
+										<input type="hidden" name="groupOrd" value="${fb.groupOrd}">
+										<button>답글달기</button>
+									</form>
+								</c:if>
+								<c:if test="${member eq null}">
+									댓글을 작성하시려면 로그인을 하셔야 해용~
+								</c:if>
 							</td>
 						</tr>
 					</c:if>

@@ -21,10 +21,9 @@ public class FreeBoardDTO {
 	private String content;
 	private String ip;
 	private Date created;
-	private Date modified;
 	private Integer state;
 	private Integer depth;
-	private Integer groupNo;
+	private Long groupNo; // freeBoardNo의 값을 가지기 때문에 Long이어야 한다.
 	private Integer groupOrd;
 	
 }

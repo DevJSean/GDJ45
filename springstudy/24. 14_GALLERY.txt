@@ -1,0 +1,77 @@
+1. pom.xml
+
+   1) 버전 최신화 하기
+   2) ojdbc6를 다운로드 받던 repository에 오류가 발생하고, ojdbc6.jar를 프로젝트의 build path에 등록하고 사용하는 방법도 오류가 난다.
+      임시방편으로 tomcat 폴더의 lib 폴더에 ojdbc6.jar를 복사해 두는 방법을 사용( 이 방법은 프로젝트 배포할 때 다시 해결해야 한다. )
+   3) commons-io dependency	     (commons-io : 첨부)
+   4) commons-fileupload dependency  (commons-fileupload : 파일업로드)
+   5) thumbnailator dependency       (thumbnailator : 파일 썸네일)
+   6) quartz dependency              (quartz : 스케줄러)
+   7) quartz jobs dependency         (quartz jobs : 스케줄러)
+   8) jackson-databind dependency    (jackson-databind)
+   9) json dependency                (json)
+   10) mybatis dependency             (mybatis) 
+   11) mybatis-spring dependency      (mybatis-spring)
+   12) spring-jdbc dependency 추가   (spring-jdbc)
+   13) hikaricp dependency 추가      (HikariCP : 속도 빠른 커넥션 풀) 
+   14) lombok dependency 추가        (lombok)
+   15) spring-test dependency 추가   (spring-test)
+   16) javax.servlet-api dependency  (javax.servlet-api) 
+   17) junit dependency              (junit) 
+---------------------------------------------------------------------------------------------------------
+2. web.xml 에 인코딩 필터 태그 넣기
+  	<!-- Encoding -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+---------------------------------------------------------------------------------------------------------
+3. webapp/resources/sql 디렉터리 생성
+   gallery.sql 작성 및 DB에 테이블 생성
+
+   webapp/resources/js 디렉터리 생성
+   jquery-3.6.0 제이쿼리 자르 파일
+
+---------------------------------------------------------------------------------------------------------
+4. 패키지 생성 
+	config, controller, domain, mapper, service, util
+
+---------------------------------------------------------------------------------------------------------
+5. domain 패키지
+	GalleryDTO.java
+	FileAttachDTO.java 
+
+---------------------------------------------------------------------------------------------------------
+6. config 패키지
+	DBConfig.java     schedulng 있는 버전
+	FileUploadConfig.java  
+		@Configuration
+ 		파일 첨부할 때 필요한 Bean 생성
+---------------------------------------------------------------------------------------------------------
+7. src/main/resources
+	1) config       typeAlias 수정
+	2) mapper 	gallery.xml 
+			<mapper namespace="com.goodee.ex14.mapper.GalleryMapper">
+	3) properties	db.properties
+---------------------------------------------------------------------------------------------------------
+8. mapper 패키지
+	FreeBoardMapper.java 인터페이스 생성
+		@Mapper
+
+---------------------------------------------------------------------------------------------------------
+9. util 패키지
+	FileUtils.java 
+		파일명 : java.util.UUID의 randomUUID() 중복 없는 값을 생성해준다.

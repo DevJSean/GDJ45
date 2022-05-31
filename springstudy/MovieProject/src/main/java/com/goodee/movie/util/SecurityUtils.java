@@ -1,14 +1,17 @@
 package com.goodee.movie.util;
 
 public class SecurityUtils {
-
-	public static String XSS(String s) {
-		s = s.replaceAll("<", "&lt;");
-		s = s.replaceAll(">", "&gt;");
-		s = s.replaceAll("\"", "&quot;");
-		s = s.replaceAll("\'", "&#x27");
-		return s;
-	}
 	
-	// MovieServiceImpl에서 작업했다.
+	public static String xss(String str) {
+		str = str.replaceAll("[<]", "&lt;");
+		str = str.replaceAll("[>]", "&gt;");
+		str = str.replaceAll("[&]", "&amp;");
+		str = str.replaceAll("\"", "&quot;");
+		str = str.replaceAll("\'", "&#x27");
+		str = str.replaceAll("[(]", "&#40;");
+		str = str.replaceAll("[)]", "&#41;");
+		str = str.replaceAll("[/]", "&#x2F;");		
+		return str;
+	}
+
 }

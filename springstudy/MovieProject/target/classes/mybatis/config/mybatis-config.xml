@@ -11,8 +11,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<typeAliases>
 		<typeAlias type="com.goodee.movie.domain.MovieDTO" alias="MovieDTO" />
+		<typeAlias type="com.goodee.movie.domain.QueryDTO" alias="QueryDTO" />
 	</typeAliases>
-	
-	
 	
 </configuration>

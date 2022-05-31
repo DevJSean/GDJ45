@@ -13,4 +13,5 @@ public class ServiceConfig {
 	public FreeBoardService freeBoardService() {
 		return new FreeBoardServiceImpl();
 	}
+	
 }

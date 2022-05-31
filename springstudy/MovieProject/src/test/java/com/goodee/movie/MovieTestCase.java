@@ -2,8 +2,6 @@ package com.goodee.movie;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +9,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.goodee.movie.config.DBConfig;
-import com.goodee.movie.domain.MovieDTO;
-import com.goodee.movie.mapper.MovieMapper;
+import com.goodee.movie.config.MovieConfig;
+import com.goodee.movie.repository.MovieRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= {DBConfig.class})
+@ContextConfiguration(classes={MovieConfig.class, DBConfig.class})
 public class MovieTestCase {
 
 	@Autowired
-	private MovieMapper movieMapper;
+	private MovieRepository movieRepository;
 	
 	@Test
 	public void 영화목록테스트() {
-		
-		List<MovieDTO> movies = movieMapper.selectMovieList();
-		assertEquals(10, movies.size());
-		
-		
+		assertEquals(10, movieRepository.selectMovies().size());
 	}
 
 }

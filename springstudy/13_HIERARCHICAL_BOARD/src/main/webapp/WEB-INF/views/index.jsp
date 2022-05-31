@@ -12,7 +12,19 @@
 </head>
 <body>
 
+	<c:if test="${member eq null}">
+		<form action="${contextPath}/member/login" method="post">
+			<input type="text" name="id" placeholder="ID"><br>
+			<input type="text" name="pw" placeholder="Password"><br>
+			<button>로그인</button>
+		</form>
+	</c:if>
+	<c:if test="${member ne null}">
+		${member.id}님 반갑습니다<br><br>
+	</c:if>
+	
 	<a href="${contextPath}/freeBoard/list">자유 게시판</a>
+
 
 </body>
 </html>

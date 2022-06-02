@@ -4,6 +4,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.goodee.ex14.mapper.GalleryMapper">
+		<!-- 
+		FileAttachDTO에 GalleryDTO를 넣은 resultMap 처리 (조인에서 활용)
+	 -->
+	 <resultMap type="GalleryDTO" id="GalleryMap">
+	 	<result column="GALLERY_NO" property="galleryNo"/>  <!-- GalleryDTO 테이블의 column을 resultMap의 property로 넣는 것 -->
+	 	<result column="WRITER" property="writer"/>  
+	 	<result column="TITLE" property="title"/>  
+	 	<result column="CONTENT" property="content"/>  
+	 	<result column="IP" property="ip"/>  
+	 	<result column="HIT" property="hit"/>  
+	 	<result column="CREATED" property="created"/>  
+	 	<result column="MODIFIED" property="modified"/>  
+	 </resultMap>
+	 <resultMap type="FileAttachDTO" id="FileAttachMap">
+	 	<result column="FILE_ATTACH_NO" property="fileAttachNo"/>
+	 	<result column="PATH" property="path"/>
+	 	<result column="ORIGIN" property="origin"/>
+	 	<result column="SAVED" property="saved"/>
+	 	<result column="DOWNLOAD_CNT" property="downloadCnt"/>
+	 	<collection resultMap="GalleryMap" property="gallery"></collection> <!-- 바로 위에서 만든 GalleryMap을 여기에 넣는다. -->
+	 </resultMap>
+	 
+	<!-- 갤러리 추가 -->
+	<!-- selectKey : GALLERY_SEQ.NEXTVAL 값을 INSERT문 실행 전에 GalleryDTO의 galleryNo에 넣어둔다.-->
+	<!-- 처음 service에서 4개 값이 오지만 selectKey 때문에 GalleryDTO에 5개의 값이 실리고, 이후 service에서도 5개의 값을 확인할 수 있다. -->
+	<insert id="insertGallery" parameterType="GalleryDTO">
+		<selectKey keyProperty="galleryNo" resultType="Long" order="BEFORE"> <!-- GalleryDTO의 galleryNo에 값을 넣으시오. insert문 실행 전에 실행하시오 -->
+			SELECT GALLERY_SEQ.NEXTVAL
+			  FROM DUAL
+		</selectKey>
+		INSERT INTO GALLERY
+			(GALLERY_NO, WRITER, TITLE, CONTENT, IP, HIT, CREATED, MODIFIED)
+		VALUES
+			(#{galleryNo}, #{writer}, #{title}, #{content}, #{ip}, 0, SYSDATE, SYSDATE)
+	</insert>
 	
+	<!-- 파일 첨부 추가 -->
+	<insert id="insertFileAttacah" parameterType="FileAttachDTO">
+		INSERT INTO FILE_ATTACH
+			(FILE_ATTACH_NO, PATH, ORIGIN, SAVED, DOWNLOAD_CNT, GALLERY_NO)
+		VALUES
+			(FILE_ATTACH_SEQ.NEXTVAL, #{path}, #{origin}, #{saved}, 0, #{gallery.galleryNo})
+	</insert>
+
+
+	<!-- 전체 갤러리 갯수 -->
+	<select id="selectGalleryCount" resultType="Integer">
+	 	SELECT COUNT(GALLERY_NO)
+	 	  FROM GALLERY
+	</select>
+
+
+	<!-- 갤러리 목록 (조인)-->
+	<select id="selectGalleryList" parameterType="Map" resultMap="FileAttachMap">
+	  SELECT A.GALLERY_NO, A.WRITER, A.TITLE, A.CONTENT, A.IP, A.HIT, A.CREATED, A.MODIFIED, A.FILE_ATTACH_NO, A.PATH, A.ORIGIN, A.SAVED, A.DOWNLOAD_CNT
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY G.GALLERY_NO DESC) AS ROW_NUM, G.GALLERY_NO, G.WRITER, G.TITLE, G.CONTENT, G.IP, G.HIT, G.CREATED, G.MODIFIED, F.FILE_ATTACH_NO, F.PATH, F.ORIGIN, F.SAVED, F.DOWNLOAD_CNT
+		        FROM GALLERY G INNER JOIN FILE_ATTACH F
+		          ON G.GALLERY_NO = F.GALLERY_NO) A
+	   WHERE A.ROW_NUM BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+
+
+	<!-- 첨부파일 반환 -->
+	<select id="selectFileAttachByNo" parameterType="Long" resultType="FileAttachDTO">
+		SELECT FILE_ATTACH_NO, PATH, ORIGIN, SAVED, DOWNLOAD_CNT
+		  FROM FILE_ATTACH
+		 WHERE FILE_ATTACH_NO = #{fileAttachNo}
+	</select>
+
+
 
 </mapper>

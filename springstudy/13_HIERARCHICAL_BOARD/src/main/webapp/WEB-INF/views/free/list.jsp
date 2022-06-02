@@ -136,16 +136,9 @@
 							<td>${fb.created}</td>
 							<td>
 								<c:if test="${member.id eq fb.writer}">
-									<span onclick="fnRemove()">
+									<a data-free_board_no="${fb.freeBoardNo}" onclick="fnRemove(this)">
 										<i class="fa-solid fa-trash-can"></i>
-									</span>
-									<script>
-										function fnRemove() {
-											if(confirm('삭제할까요?')){
-												location.href='${contextPath}/freeBoard/remove?freeBoardNo=${fb.freeBoardNo}';
-											}
-										}
-									</script>
+									</a>
 								</c:if>
 							</td>
 						</tr>
@@ -179,6 +172,14 @@
 			</tr>
 		</tfoot>
 	</table>
+	
+	<script>
+		function fnRemove(a) {
+			if(confirm('삭제할까요?')){
+				a.href='${contextPath}/freeBoard/remove?freeBoardNo=' + $(a).data('free_board_no');
+			}
+		}
+	</script>
 
 </body>
 </html>

@@ -75,3 +75,34 @@
 9. util 패키지
 	FileUtils.java 
 		파일명 : java.util.UUID의 randomUUID() 중복 없는 값을 생성해준다.
+---------------------------------------------------------------------------------------------------------
+10. index.jsp
+
+---------------------------------------------------------------------------------------------------------
+11. controller
+	GalleryController.java
+		@Controller
+
+---------------------------------------------------------------------------------------------------------
+12. list.jsp
+    save.jsp
+---------------------------------------------------------------------------------------------------------
+
+13. service
+	GalleryService.java 인터페이스
+	GalleryServiceImpl.java
+		@Service
+
+---------------------------------------------------------------------------------------------------------
+view			controller				service				DAO, repository(mapper패키지)		mybatis/mapper
+list.jsp	-	GalleryController.java  -		GalleryServiceImpl.java  -	GalleryMapper.java(인터페이스)   -	gallery.xml
+			@Controller				@Service			@Mapper
+			@Autowired				@Autowired
+	                private GalleryService galleryService;  private GalleryMapper galleryMapper;			
+							
+					ServiceConfig.java
+					@Configuration					
+					@bean
+
+
+---------------------------------------------------------------------------------------------------------

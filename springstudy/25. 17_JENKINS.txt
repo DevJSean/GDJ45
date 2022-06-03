@@ -134,27 +134,146 @@ github 세팅
 			(1) Expiration => No expiration(유효기간 제한 없음)
 			(2) Select scopes => repo(필수), admin:repo_hook(github에 push를 하면 자동 빌드를 원하는 경우에 선택)
 * git 로컬 세팅
-1. C:\17_JENKINS 경로에 프로젝트 배치
+1. C:\17_JENKINS 경로에 프로젝트 배치   ( C:\GDJ45 전체가 이미 repository로 등록되어 있어서)
 2. 프로젝트 우클릭 - [Git Bash Here]
-	$ git init  ## 로컬 저장소로 만들기
-	$ git config --global user.name 'goodeeit'  ## 사용자 이름 등록
+	$ git init                                               ## 로컬 저장소로 만들기
+	$ git config --global user.name 'goodeeit'               ## 사용자 이름 등록
 	$ git config --global user.email 'wltlgus110@naver.com'  ## 사용자 이메일 등록
-	$ git config user.name ## 사용자 이름 확인
-	$ git config user.email ## 사용자 이메일 확인
-	$ git add . ## 추적 시작(스테이징, 임시 저장의 개념)
-	$ git commit -m '2022-06-03' ## 커밋 (저장 완료)
-3. GIT에서 repository를 프로젝트 이름과 맞춰서 생성
-   repository 링크 복사
+	$ git config user.name					 ## 사용자 이름 확인
+	$ git config user.email 				 ## 사용자 이메일 확인
+	$ git add . 				  	  	 ## 추적 시작(스테이징, 임시 저장의 개념)
+	$ git commit -m '2022-06-03' 				 ## 커밋 (저장 완료)
+3. GIT에서 repository를 프로젝트 이름과 맞춰서 생성, repository 링크 복사
 	$ git remote add origin https://github.com/DevJSean/17_JENKINS.git   ## 원격저장소 등록
-	$ git pull origin main --allow-unrelated-histories  ## 내려 받기
-		vim editor편집기가 열리는데 :wq 를 입력해서 빠져나오면 된다.
-	$ git push origin main  ## 올리기
+	$ git pull origin main --allow-unrelated-histories  		     ## 내려 받기
+	:wq						  vim editor편집기가 열리는데 :wq 를 입력해서 빠져나오면 된다.
+	$ git push origin main 						     ## 올리기
 
 ------------------------------
-jenkins 설치 및 세팅
+jenkins 설치
 1. 톰캣 아래 webapps 디렉터리에 jenkins.war를 가져다 둔다.
-	C:\program Files\apache-tomcat-9.0.62\webapps\jenkins.war
+	(1) C:\program Files\apache-tomcat-9.0.62\webapps\jenkins.war
+
 2. Tomcat 폴더 아래 bin 디렉터리에서 톰캣을 구동한다.
 	(1) Windows : startup.bat 파일 관리자 권한으로 실행
 	(2) Linux   : startup.sh 파일
+
 3. http://localhost:9090/jenkins 접속하면 젠킨스가 실행된다.
+
+4. 초기 젠킨스 관리자 계정
+	(1) 이름 : admin
+	(2) 비밀번호 : C:\Users\사용자계정이름\.jenkins\secrets\initialAdminPassword 메모장으로 열어서 확인
+
+5. 플러그인 설치
+  	(1) Install suggested plugins 선택
+
+6. 젠킨스 관리자 계정 등록 화면 
+	(1) 아이디 / 비밀번호 / 이름 / 이메일 등 등록하고 앞으로 이것으로 사용하면 된다.
+	(2) goodeeit / 1111 / 구디아이티 / 내 아이디
+	(3) 건너뛰고, 초기 젠킨스 관리자 계정을 써도 상관없다.
+
+7. jenkins URL
+	(1) http://localhost:9090/jenkins 입력
+
+※. C:\Program Files\apache-tomcat-9.0.62\webapps 
+   의 jenkins.war와 jenkins 폴더를 삭제하면 설치를 삭제한 것이다.
+------------------------------
+jenkins 세팅
+
+- [좌측] Jenkins 관리
+
+1. 시스템 설정
+   Jenkins URL을 
+   http://localhost:9090/jenkins/ 에서
+   http://127.0.0.1:9090/jenkins/ 로 수정하기 (젠킨스에서는 localhost 사용이 안 됨)
+
+2. Global Tool Configuration
+   1) Maven Configuration
+	(1)Default settings provider
+		=> Settings file in filesystem
+		=> File path
+		=> C:\Program Files\apache-maven-3.8.1\conf\settings.xml
+	(2) Default global settings provider
+		=> Global settings file in filesystem
+		=> File path
+		=> C:\Program Files\apache-maven-3.8.1\conf\settings.xml
+   2) Git
+	(1) Name
+		=> MyGit (아무거나 정하면 됨)
+	(2) Path to Git executable
+		=> C:\Program Files\Git\bin\git.exe
+   3) Maven
+	(1) Add Maven
+		* Name
+		=> Maven3.8.1 (아무거나 정하면 되지만 버전으로 정했다)
+		* Install automatically 선택 해제
+		* MAVEN_HOME
+		=> C:\Program Files\apache-maven-3.8.1
+
+3. System Configuration - 플러그인 관리
+   [설치 가능] 탭으로 이동해서 "Deploy to container" 검색 후 설치 (향후 시스템 재시작이 필요함)
+   재시작 없이 Install without restart 선택 가능
+	* Deploy to Container
+	  Jenkins가 war를 만드는데 이걸 Tomcat에 두지는 않는다.
+	  Deploy to container 플러그인을 설치하면 Jenkins가 war를 만들어서 Tomcat에 두는 것까지 한다.
+
+4. Security - Manage Credentials
+   1) Domains 아래 (global) 선택하면 목록(▼) 나오면 클릭 - [Add Credentials] 선택
+
+	* Tomcat 접속용 사용자 등록하기 (톰캣의 conf 폴더 아래 tomcat-users.xml에 적어둔 사용자이다.)
+	(1) Username
+		=> tomcat-manager  (ID에 적는 것이 아님)
+	(2) Password
+		=> 1111
+	
+	* Github 접속용 사용자 등록하기
+	(1) Username
+		=> 자신의 github 아이디 
+	(2) Password
+		=> 자신의 github Personal access token
+--------------------------- 
+빌드
+
+NEW ITEMS
+
+17_JENKINS
+
+FREESTYLE
+
+--
+
+소스코드관리
+GIT
+해당 레파지토리 URL을 복붙
+Credentials
+devjsean
+
+branches
+*/main      17_jenkins git bash 했을 때 main임
+
+Build
+invoke top-level maven targets
+Maven3.8.1
+Goals
+clean package
+
+빌드 후 조치
+deploy
+
+deploy war/ear to a container
+WAR/EAR files
+**/*.war
+
+
+container
+add container
+tomcat 9.x remote
+credential
+tomcat manager/1111
+
+url
+http://localhost:9090
+http://127.0.0.1:9090
+
+
+localhost:9090/ex17-1.0.0/

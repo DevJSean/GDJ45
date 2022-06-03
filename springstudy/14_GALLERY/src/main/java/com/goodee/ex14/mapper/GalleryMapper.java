@@ -12,18 +12,18 @@ import com.goodee.ex14.domain.GalleryDTO;
 public interface GalleryMapper {
 
 	public int insertGallery(GalleryDTO gallery);
-	
 	public int insertFileAttacah(FileAttachDTO fileAttach);
 	
 	
-	
-	
 	public int selectGalleryCount();
-	
 	public List<FileAttachDTO> selectGalleryList(Map<String, Object> map);
 	
 	
-	
 	public FileAttachDTO selectFileAttachByNo(Long fileAttachNo);
+	public int updateDownloadCnt(Long fileAttachNo);
+	
+	public GalleryDTO selectGalleryByNo(Long galleryNo);
+	public List<FileAttachDTO> selectFileAttachListInTheGallery(Long galleryNo);
+	public int updateGalleryHit(Long galleryNo);
 	
 }

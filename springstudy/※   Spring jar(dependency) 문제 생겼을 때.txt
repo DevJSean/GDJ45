@@ -8,7 +8,13 @@
 3. 톰캣의 라이브러리에 jar 추가
 
 
-문제가 생기는 dependency를 pom.xml에서 지우고
-spring sts 종료
+문제가 생기는 dependency를 pom.xml에서 지우고 spring sts 종료
 C:\Users\GDJ45\.m2 의 repository  폴더를 지우고  spring sts를 실행한다.
 다운로드가 끝날 때까지 대기한다.
+
+
+----------------------------------
+오류가 나는 프로젝트를 삭제
+
+새 프로젝트 추가 - com.goodee.ex() 맞추고
+pom.xml, web.xml를 복붙해본다.

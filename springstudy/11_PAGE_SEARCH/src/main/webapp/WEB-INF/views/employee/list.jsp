@@ -66,15 +66,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${employees}" var="emp" varStatus='vs'> <!-- varStatus는 인덱스를 사용하기 위해서 사용 -->
+			<c:forEach items="${employees}" var="emp" varStatus="vs"> <!-- varStatus는 인덱스를 사용하기 위해서 사용 -->
 				<tr>
 					<td>${beginNo - vs.index}</td>
 					<td>${emp.employeeId}</td>
 					<td>${emp.firstName}</td>
 					<td>${emp.hireDate}</td>
 					<td>${emp.salary}</td>
-					<td>${emp.departmentId}</td>
-					<td>${emp.departmentName}</td>
+					<td>${emp.department.departmentId}</td>
+					<td>${emp.department.departmentName}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -85,7 +85,6 @@
 				</td>
 			</tr>
 		</tfoot>
-		
 	</table>
 
 

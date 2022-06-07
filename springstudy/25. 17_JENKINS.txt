@@ -72,6 +72,7 @@ Tomcat 설치 및 세팅
                redirectPort="8443" />
 5. 톰캣 아래 conf 디렉터리 아래 tomcat-user.xml을 열고, tomcat-manager를 추가한다.
 ※. 이름이 tomcat-manager이고, 비밀번호는 1111로 저장해 두었다. 기억해야 함.
+
 	<role rolename="manager-gui" />
 	<role rolename="manager-script" />
 	<role rolename="manager-jmx" />
@@ -169,7 +170,7 @@ jenkins 설치
 
 6. 젠킨스 관리자 계정 등록 화면 
 	(1) 아이디 / 비밀번호 / 이름 / 이메일 등 등록하고 앞으로 이것으로 사용하면 된다.
-	(2) goodeeit / 1111 / 구디아이티 / 내 아이디
+	(2) goodeeit / 1111 / 구디아이티 / 내 이메일
 	(3) 건너뛰고, 초기 젠킨스 관리자 계정을 써도 상관없다.
 
 7. jenkins URL
@@ -234,46 +235,62 @@ jenkins 세팅
 --------------------------- 
 빌드
 
-NEW ITEMS
+ jenkins 프로젝트 생성
 
-17_JENKINS
+  - [좌측] - [새로운 Item]
 
-FREESTYLE
+  - Enter an item name => 17_JENKINS (github에 올린 프로젝트명), 종류 Freestyle project
 
---
+    1) 소스 코드 관리
+        => Git
+        => Repository URL => https://github.com/goodeeit/17_JENKINS.git
+        => Credentials    => github 접속용 Credentials 선택
+        => Branch Specifier (blank for 'any')
+           main   브랜치이면  */main
+           master 브랜치이면  */master
+    2) Build
+        => Invoke top-level Maven targets
+        => Maven Version  => Maven3.8.1
+        => Goals          => clean package 입력
+    3) 빌드 후 조치
+       * Deploy to container 플러그인이 있는 경우에만 할 수 있음. 없으면 넘어가도 됨.
+        => Deploy war/ear to a container
+        => WAR/EAR files  => **/*.war
+        => Context path   => 비워둠.
+        => Containers
+           => Tomcat 9.x Remote
+           => Credentials => tomcat-manager/****** (tomcat 접속용 Credentials)
+           => Tomcat URL  => http://localhost:9090 (https 안 됨)
+-------------------------
+ jenkins 프로젝트 빌드
 
-소스코드관리
-GIT
-해당 레파지토리 URL을 복붙
-Credentials
-devjsean
+ 1. Deploy to container 플러그인이 없어서 빌드 후 조치를 못한 경우
+    Build Now 클릭
+    => C:\Users\사용자계정\.jenkins\jobs\17_JENKINS\workspace\target\ex17-1.0.0.war 생김.
+    => 이걸 톰캣으로 직접 옮기면 됨.
 
-branches
-*/main      17_jenkins git bash 했을 때 main임
+ 2. Deploy to container 플러그인 사용
+    Build Now 클릭
+    => C:\Users\사용자계정\.jenkins\jobs\17_JENKINS\workspace\target\ex17-1.0.0.war 생김.
+    => 빌드 후 조치로 인해서 최종적으로 톰캣\webapp\ex17-1.0.0.war 생김.
 
-Build
-invoke top-level maven targets
-Maven3.8.1
-Goals
-clean package
+ 3. 빌드 성공하면
+    http://localhost:9090/ex17-1.0.0  입력 후 동작 확인하면 끝.
+    만약, pom.xml에 다음 태그를 추가해 두었다면, war 이름이 ex17.war 로 버전 없이 생성되므로
+    http://localhost:9090/ex17  입력 후 동작 확인하면 끝.
+    <build>
+        <finalName>${artifactId}</finalName>
+    </build>
 
-빌드 후 조치
-deploy
+ 4. 빌드 실패하면
+    console output 통해서 오류 확인 후 수정하고 다시 빌드해야 함.
 
-deploy war/ear to a container
-WAR/EAR files
-**/*.war
-
-
-container
-add container
-tomcat 9.x remote
-credential
-tomcat manager/1111
-
-url
-http://localhost:9090
-http://127.0.0.1:9090
-
-
-localhost:9090/ex17-1.0.0/
+ 5. 톰캣에 배포된 ex17-1.0.0.war 이름을 임의로(예를 들어) myapp.war로 변경하면
+    myapp 폴더가 새로 생기게 됨. 그럼 이제부터는 http://localhost:9090/myapp 으로 접속해야 함.
+    즉 war 파일명으로 접속하면 된다는 이야기.
+-------------------------
+반복연습하기
+ 1. Tomcat 지움 : C:\Program Files\apache-tomcat-9.0.62 폴더 삭제
+ 2. Maven  지움 : C:\Program Files\apache-maven-3.8.1 폴더 삭제
+ 3. Tomcat 설치 및 세팅부터 다시 연습하면 됨.
+    많이 연습하세요!

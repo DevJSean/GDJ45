@@ -9,6 +9,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="../resources/js/jquery-3.6.0.js"></script>
+<script>
+
+	$(function(){
+		
+		// 삭제
+		$('#btnRemove').on('click', function(){
+			if(confirm('삭제할까요?')){
+				location.href='${contextPath}/gallery/remove?galleryNo=${gallery.galleryNo}';
+			}
+		})
+		
+		// 수정 페이지
+		$('#btnChangePage').on('click', function(){
+			location.href='${contextPath}/gallery/changePage?galleryNo=${gallery.galleryNo}';
+		})
+	})
+
+</script>
 
 <style>
 	img {
@@ -29,6 +48,9 @@
 	조회수 ${gallery.hit}<br>
 	작성일 ${gallery.created}<br>
 	수정일 ${gallery.modified}<br>
+	
+	<input type="button" value="삭제" id="btnRemove">
+	<input type="button" value="수정페이지" id="btnChangePage">
 	
 	<hr>
 	

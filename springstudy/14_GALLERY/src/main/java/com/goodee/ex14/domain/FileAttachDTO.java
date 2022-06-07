@@ -16,9 +16,7 @@ public class FileAttachDTO {
 	private String path;
 	private String origin;
 	private String saved;
+	private Long galleryNo;
 	private Integer downloadCnt;
-	
-	//private Long galleryNo;
-	private GalleryDTO gallery;
 	
 }

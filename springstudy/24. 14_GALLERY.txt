@@ -79,16 +79,16 @@
 10. index.jsp
 
 ---------------------------------------------------------------------------------------------------------
-11. controller
+11. controller 패키지
 	GalleryController.java
 		@Controller
 
 ---------------------------------------------------------------------------------------------------------
 12. list.jsp
     save.jsp
----------------------------------------------------------------------------------------------------------
 
-13. service
+---------------------------------------------------------------------------------------------------------
+13. service 패키지
 	GalleryService.java 인터페이스
 	GalleryServiceImpl.java
 		@Service
@@ -106,3 +106,10 @@ list.jsp	-	GalleryController.java  -		GalleryServiceImpl.java  -	GalleryMapper.j
 
 
 ---------------------------------------------------------------------------------------------------------
+14. batch 패키지
+	DeleteIllegalFiles.java
+		@Component
+	
+		@Autowired
+		private GalleryMapper galleryMapper;
+	

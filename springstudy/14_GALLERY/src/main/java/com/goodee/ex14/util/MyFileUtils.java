@@ -42,13 +42,13 @@ public class MyFileUtils {
 		return "C:" + sep + "upload" + sep + year + sep + month + sep + day;
 	}
 	
-	// 어제 경로 (스케줄링에서 사용)
+	// 어제 경로 (batch, 스케줄링에서 사용)
 	public static String getYesterdayPath() {
-		Calendar calendar = Calendar.getInstance(); // singleton 패턴
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -1);
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH) + 1;
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
-		calendar.add(Calendar.DATE, -1);
 		String sep = Matcher.quoteReplacement(File.separator);
 		return "C:" + sep + "upload" + sep + year + sep + month + sep + day;
 	}

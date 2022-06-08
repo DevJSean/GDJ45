@@ -412,6 +412,8 @@ remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 To https://github.com/DevJSean/local.git
    19c4d12..a080409  main -> main
 
+ 
+$ git push -f origin main                          # pull 과정 하지 않고 강제로 push 하는 방법
 
 
 

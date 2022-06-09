@@ -51,16 +51,21 @@
 		// 개별 선택
 		$('.checkOne').on('click', function(){
 			
+			let checkAll = true;
+			
 			// 개별 선택이 하나라도 unchecked 상태이면, 전체 선택도 unchecked 상태로 바껴야 한다.
 			$.each($('.checkOne'), function(i, checkOne){
-				if($(checkOne).is(':checked') == false){   // 개별선택이 체크가 안 되어 있으면
+				if($(checkOne).is(':checked') == false){   // 개별선택이 하나라도 체크가 안 되어 있으면
 					$('#checkAll').prop('checked', false); // 전체선택의 체크 해제
 					$('.items').removeClass('check');      // 이미지 해제 
-					return;
+					checkAll = false;					   // 전체 선택이 아니다.
+					return false;
 				}
+			})
+			if(checkAll){
 				$('#checkAll').prop('checked', true);
 				$('.items').addClass('check');
-			})
+			}
 		})
 		
 		// 각 체크 박스는 클릭할때마다 check 클래스를 줬다 뺐었다 해야 함.

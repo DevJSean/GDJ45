@@ -1,6 +1,7 @@
 package com.goodee.ex15.service;
 
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -172,6 +173,7 @@ public class MemberServiceImpl implements MemberService {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			if(res == 1) {
+				request.getSession().invalidate(); // 삭제되었으면 session에서 로그인 정보 빼야함.
 				out.println("<script>");
 				out.println("alert('Good Bye')");
 				out.println("location.href='" + request.getContextPath() + "'");
@@ -260,5 +262,32 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void keepLogin(HttpServletRequest request) {
+		
+		// 1000 * 60 * 60 * 24 * 7 : 7일에 해당하는 밀리초(ms)
+		Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24 * 7)); // 지금으로부터 7일 후 날짜
+		
+		// request.getSession().getId() == 9A071414F2E08D3CC7A7BC92D8F364A4(브라우저 닫을 때마다 바뀜) : 브라우저의 쿠키에서 JSESSIONID로 확인 가능 
+		String sessionId = request.getSession().getId();		
+		String id = request.getParameter("id");	
+		
+		// MemberDTO
+		MemberDTO member = MemberDTO.builder()
+				.id(id)
+				.sessionId(sessionId)
+				.sessionLimit(sessionLimit)
+				.build();
+	
+		// MEMBER 테이블에서 member 정보 수정
+		memberMapper.updateSessionInfo(member);
+	}
+	
+	@Override
+	public MemberDTO getMemberBySessionId(String sessionId) {
+		return memberMapper.selectMemberBySessionId(sessionId);
+	}
+	
 	
 }

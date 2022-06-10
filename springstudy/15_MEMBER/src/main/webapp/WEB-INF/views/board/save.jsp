@@ -12,11 +12,9 @@
 </head>
 <body>
 	
-	<jsp:include page="./layout/header.jsp"></jsp:include>
+	<h1>게시글 작성 화면</h1>
 	
-	<h1>MAIN PAGE</h1>
-	
-	<a href="${contextPath}/board/savePage">새글작성</a>
-	
+	<h3>재밌는 글쓰기</h3>
+	<textarea rows="5" cols="30"></textarea>
 </body>
 </html>

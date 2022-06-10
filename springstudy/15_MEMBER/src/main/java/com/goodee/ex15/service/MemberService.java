@@ -11,12 +11,23 @@ import com.goodee.ex15.domain.SignOutMemberDTO;
 public interface MemberService {
 
 	public Map<String, Object> idCheck(String id);
+	
 	public Map<String, Object> emailCheck(String email);	
+	
 	public Map<String, Object> sendAuthCode(String email);	
+	
 	public void signIn(HttpServletRequest request, HttpServletResponse response);
+	
 	public void signOut(HttpServletRequest request, HttpServletResponse response);
+	
 	public MemberDTO login(HttpServletRequest request);
+	
 	public SignOutMemberDTO findSignOutMember(String id);
+	
 	public void reSignIn(HttpServletRequest request, HttpServletResponse response);
+	
+	public void keepLogin(HttpServletRequest request);
+	
+	public MemberDTO getMemberBySessionId(String sessionId); 
 	
 }

@@ -1,0 +1,37 @@
+REST : Representational State Transfer
+데이터 보내는 형식을 다시 표현했다. (주소 표기법을 다시 표현했다)
+
+
+1. 정의
+	자원을 정의하고 자원의 주소를 지정하는 방식에 대한 하나의 형식이다.
+	REST 방식을 따르는 시스템을 RESTful이라고 한다.
+
+2. URL과 Method를 결합해서 동작이 결정된다.
+
+3. URL에 파라미터가 경로처럼 포함되어 사용된다.
+	기존 : /members?page=1
+	REST : /members/page/1		(request.getParameter() 사용 못한다)
+
+4. CRUD 처리
+	   	  URL			HTTP Method
+	1) 목록 : ~/members		GET
+	2) 상세 : ~/members/1		GET
+	3) 삽입 : ~/members		POST
+	4) 수정 : ~/members		PUT
+	5) 삭제 : ~/members/1		DELETE
+
+같은 의미의 주소이다.
+http://localhost:9090/ex16/board/list?page=1
+http://localhost:9090/ex16/board/page/1  (파라미터가 없는 것처럼 보인다)
+
+http://localhost:9090/ex16/boards/1 상세보기 (1번 게시글)
+
+---------------------------------------------------------------------------
+
+ajax를 이용한 paging
+
+
+
+FileAttach
+
+

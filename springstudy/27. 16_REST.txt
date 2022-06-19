@@ -35,3 +35,16 @@ ajax를 이용한 paging
 FileAttach
 
 
+
+-------------------------------------------------------------------------------------------------------------
+파일 첨부할 때 이미지만이 아닌 다양한 파일들을 첨부하고 싶다면
+DB에 칼럼을 추가한다.
+
+FILE_TYPE VARCHAR(1 BYTE)
+I : IMAGE
+M : MOVIE
+...
+	
+serviceImpl에서 무슨 파일인지 확인하는 코드
+String contentType = Files.probeContentType(file.toPath()); // 이미지의 Content-Type(image/jpeg, image/png, image/gif)
+if(contentType.startsWith("image")) {

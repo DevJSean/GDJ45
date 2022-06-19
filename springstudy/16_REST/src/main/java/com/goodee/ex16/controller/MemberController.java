@@ -34,7 +34,6 @@ public class MemberController {
 	// INSERT -> POST
 	// UPDATE -> PUT
 	// DELETE -> DELETE
-	//
 	
 	
 	@GetMapping("/member/management")

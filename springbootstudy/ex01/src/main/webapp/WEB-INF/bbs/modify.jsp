@@ -23,26 +23,27 @@
 	
 	function fnSubmit(){
 		$('#f').on('submit', function(event){
-			if( $('#writer').val() == '' || $('#title').val() == '' ){
-				alert('작성자와 제목은 필수입니다.');
+			if( $('#title').val() == '' ){
+				alert('제목은 필수입니다.');
 				event.preventDefault();
 				return false;
 			}
 			return true;
 		})
 	}
-
+	
 </script>
 </head>
 <body>
 
-	<h1>게시글작성화면</h1>
-	
-	<form id="f" action="${contextPath}/bbs/add" method="post">
-		<input type="text" name="writer" placeholder="작성자"><br>
-		<input type="text" name="title" placeholder="제목"><br>
-		<textarea name="content" id="content"></textarea><br><br>
-		<button>작성완료</button>
+	<form id="f" action="${contextPath}/bbs/modify" method="post">
+		<input type="hidden" name="bbsNo" value="${bbs.bbsNo}"><br>
+		작성자 ${bbs.writer}<br>
+		제목 <input type="text" name="title" id="title" value="${bbs.title}"><br>
+		<textarea name="content" id="content">${bbs.content}</textarea><br><br>
+		<button>수정완료</button>
+		<input type="reset" value="다시작성">
+		<input type="button" value="목록" onclick="location.href='${contextPath}/bbs/list'">
 	</form>
 
 </body>

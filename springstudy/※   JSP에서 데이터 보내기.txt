@@ -1,0 +1,29 @@
+	// 데이터 보내는 방법 1  
+	// 파라미터 전송(form의 name 속성 이용)
+		$.ajax({
+			data: $('#f').serialize(), 파라미터 전송 (name 속성)
+		})
+	// 파라미터 전송(form의 id를 이용하여 json을 보내기)
+		$.ajax({
+			data: JSON.stringify({
+				display: $('#display').val(),
+				sort: $(':radio[name="sort"]:checked').val(),
+				query: $('#query').val()
+			}),
+			contentType: 'application/json',
+			type: 'POST', ...
+		})
+		Controller에서 데이터 받을 때
+		(@RequestBody SearchDTO search)
+		
+	// 데이터 보내는 방법 2
+		HttpServletRequest request
+		
+		Controller에서 데이터 받을 때
+		@RequestParam String display, ...
+	
+	// 데이터 보내는 방법 3
+		SearchDTO
+			String display
+			String sort
+			String query

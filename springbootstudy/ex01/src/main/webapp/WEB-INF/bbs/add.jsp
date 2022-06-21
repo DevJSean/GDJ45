@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="../resources/summernote-0.8.18-dist/summernote-lite.css"/>
 <script src="../resources/js/summernote.js"></script>
 <script>
-
 	$(function(){
 		fnSubmit();
 		fnSummernote();  // summernote.js에 포함되어 있는 함수
@@ -31,7 +30,6 @@
 			return true;
 		})
 	}
-
 </script>
 </head>
 <body>

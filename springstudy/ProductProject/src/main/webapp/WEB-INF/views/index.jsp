@@ -29,7 +29,7 @@
 					$.each(products, function(i, product){
 						var tr = '<tr>';
 						tr += '<td>' + product.title + '</td>';
-						tr += '<td>' + product.image + '</td>';
+						tr += '<td><img width="100px" src=' + product.image + '></td>';
 						tr += '<td>' + product.lprice + '</td>';
 						tr += '</tr>';
 						$('#products').append(tr);

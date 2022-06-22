@@ -28,7 +28,7 @@
 					var products = obj.items;
 					$.each(products, function(i, product){
 						var tr = '<tr>';
-						tr += '<td>' + product.title + '</td>';
+						tr += '<td><a href="' + product.link + '">' + product.title + '</a></td>';
 						tr += '<td><img width="100px" src=' + product.image + '></td>';
 						tr += '<td>' + product.lprice + '</td>';
 						tr += '</tr>';
@@ -91,7 +91,7 @@
 				<option value="100">100</option>
 			</select>
 		</label><br>
-		<label for="sim"><input type="radio" name="sort" id="sim" value="sim">유사도</label>
+		<label for="sim"><input type="radio" name="sort" id="sim" value="sim" checked="checked">유사도</label>
 		<label for="date"><input type="radio" name="sort" id="date" value="date">날짜순</label>
 		<label for="asc"><input type="radio" name="sort" id="asc" value="asc">낮은가격순</label>
 		<label for="dsc"><input type="radio" name="sort" id="dsc" value="dsc">높은가격순</label><br>

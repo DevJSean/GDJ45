@@ -18,7 +18,7 @@
 	$(function(){
 		
 		// 수정 완료
-		$('#f').on('submit', function(evenet){
+		$('#f').on('submit', function(event){
 			if($('#title').val() == '${gallery.title}'&& $('#content').val() == '${gallery.content}' && $('#files').val() == '') {
 				alert('변경된 내용이 없습니다.');
 				event.preventDefault();

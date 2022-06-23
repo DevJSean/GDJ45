@@ -1,0 +1,100 @@
+spring initializr
+project - maven project
+language - java
+spring boot - 2.6.8
+project metadata - group - com.goodee
+		   artifact - ex02
+		   name - ex02
+		   packaging - jar (jar를 선택하면 jsp를 사용하지 않겠다는 뜻)
+		   java - 11
+dependencies - spring web(web server에 web concainer 기능을 추가한 WAS(tomcat), jackson, spring core...)
+	     - lombok
+	     - oracle driver
+	     - mybatis framework
+	     - thymeleaf(controller의 return 값들(index.jsp ...)을 html로 인식하게 해준다(index.html ...))
+
+-------------------------------------------------------------------------
+jsp를 사용하지 않기 때문에 ServletInitializer.java가 없다.
+pom.xml에서 packaging이 없다.
+jsp를 사용하지 않기 때문에 pom.xml에서 tomcat-embed-jasper, jstl이 필요 없다.
+
+-------------------------------------------------------------------------
+application.properties
+jsp를 사용하지 않기 때문에 servlet-context.xml 내용만 없고 ex01과 동일하다.
+
+-------------------------------------------------------------------------
+static resource 정적 자원
+css, js, sql, images 등의 정적 자원들은
+src/main/resources의 static 폴더에 보관한다.
+
+<thymeleaf를 쓸 때는 resources의 static 폴더가 정적 자원의 기본 위치이다>
+
+-------------------------------------------------------------------------
+templates
+
+web container(webapp) 만들 필요 없이
+src/main/resources templates 폴더에 html을 보관한다.
+
+<thymeleaf를 쓸 때는 resources의 templates 폴더가 .html의 기본 위치이다>
+
+-------------------------------------------------------------------------
+pom.xml
+	commons-io 추가
+	commons-fileupload 추가
+	thumbnailator 추가 
+
+-------------------------------------------------------------------------
+기본 작업(java)은 springstudy 14_gallery에서 복사해온 상황
+src/main/resources/templates
+
+index.html
+	<html xmlns:th="http://www.thymeleaf.org">
+
+	jsp에서 쓰던 방법 : <a href="${contextPath}/board/noticeList">공지사항</a>
+
+	<!-- Link URL Expressions : @{...}  타임리프 사용할 때 URL 이동하는 방법 --> 
+	thymeleaf(html) 방법 : <a th:href="@{/gallery/list}">갤러리</a>
+
+-------------------------------------------------------------------------
+src/main/resources/templates/gallery
+
+list.html
+	
+	외부 css 가지고 오는 법
+	<link rel="stylesheet" th:href="@{/css/list.css}">  기본 위치가 static으로 잡혀있어서 바로 /css를 적으면 된다.
+	
+	jsp  -> expression language
+	html -> value expression
+	표기법은 같다   ${}
+	사용법은 다르다 <td th:text="${변수값}"></td>
+
+	반복문 사용
+	<tr th:each="변수,인덱스사용할변수:배열"></tr>
+	<tr th:each="gallery,rowStat:${galleries}">
+		<td th:text="${beginNo - rowStat.index}"></td>
+		<!-- 파라미터 보낼 때 방법이 다르다. ?가 아닌 () 사용 -->
+		<td><a th:href="@{/gallery/detail(galleryNo=${gallery.galleryNo})}" th:text="${gallery.title}" ></a></td>
+		<td th:text="${gallery.writer}"></td>
+		<td th:text="${gallery.hit}"></td>
+		<td th:text="${#dates.format(gallery.created,'yyyy-MM-dd HH:mm:ss')}"></td>
+		<!-- 
+			Calendar 타입 : ${#calendars.format(날짜, '형식')}
+			Date 타입     : ${#dates.format(날짜, '형식')}
+			String 타입   : ${#temporals.format(날짜, '형식')}
+			'형식'은 SimpleDateFormat의 pattern 작성법을 따른다.
+		-->
+	</tr>
+
+	HTML 태극가 포함된 텍스트 넣기
+	<tr>
+		<!-- th:utext="HTML태그가 포함된 텍스트" -->
+		<td colspan="5" th:utext="${paging}"></td>
+	</tr>
+
+-------------------------------------------------------------------------
+save.html
+
+	<input type="button" value="목록" th:onclick="|location.href='@{/gallery/list}'|"> <!-- thymeleaf || 방법이 더 편하다 -->
+				     <!-- th:onclick="'location.href=\'' + @{/gallery/list} + '\''" -->		  
+
+

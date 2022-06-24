@@ -25,6 +25,11 @@
 		$('#btnChangePage').on('click', function(){
 			location.href='${contextPath}/gallery/changePage?galleryNo=${gallery.galleryNo}';
 		})
+		
+		// 수정 페이지
+		$('#btnList').on('click', function(){
+			location.href='${contextPath}/gallery/list';
+		})
 	})
 
 </script>
@@ -51,6 +56,7 @@
 	
 	<input type="button" value="삭제" id="btnRemove">
 	<input type="button" value="수정페이지" id="btnChangePage">
+	<input type="button" value="목록" id="btnList">
 	
 	<hr>
 	

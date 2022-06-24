@@ -13,7 +13,7 @@ public interface GalleryMapper {
 	
 	// 갤러리 목록
 	public int selectGalleryCount();
-	public List<FileAttachDTO> selectGalleryList(Map<String, Object> map);
+	public List<GalleryDTO> selectGalleryList(Map<String, Object> map);
 
 	// 갤러리 상세 보기
 	public GalleryDTO selectGalleryByNo(Long galleryNo);

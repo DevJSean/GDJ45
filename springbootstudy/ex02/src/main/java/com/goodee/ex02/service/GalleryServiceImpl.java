@@ -67,7 +67,7 @@ public class GalleryServiceImpl implements GalleryService {
 		map.put("endRecord", pageUtils.getEndRecord());
 		
 		// beginRecord ~ endRecord 목록
-		List<FileAttachDTO> galleries = galleryMapper.selectGalleryList(map);
+		List<GalleryDTO> galleries = galleryMapper.selectGalleryList(map);
 		
 		// list.jsp로 보낼 데이터
 		model.addAttribute("totalRecord", totalRecord);
